@@ -6,12 +6,8 @@
 
 # 代码片段
 
-
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
-
-![](240218205403.png)
-
 
 
 ```js
@@ -63,6 +59,57 @@ const options = {
     ]
 }
 renderContributionGraph(this.container, options)
+```
+
+## 热力图-标签检索
+
+
+```js
+const tag = '{{Tag}}'
+const data = dv.pages(tag)
+.groupBy(p => p.file.ctime.toFormat('yyyy-MM-dd'))
+.map(entry => {
+return { 
+	date: entry.key, 
+	value: entry.rows.length, 
+	items: entry.rows.map(p => ({
+        label: p.file.name,
+        value: 123,
+        link: p.file.path}))
+    }
+}).values
+const calendarData = {
+	title: '',
+	titleStyle: {
+  fontSize: '18px',
+  textAlign: 'center'
+	},
+	data: data,
+	graphType: 'month-track',
+	startOfWeek: 1,
+	cellStyleRules: [
+	  	{color: "#f1d0b4",
+	   	min: 1,
+	  	max: 3,
+	  	},
+	   	{
+	  	color: "#e6a875",
+	  	min: 3,
+	   	max: 10,
+	  	},
+	   	{
+	   	color: "#d97d31",
+	  	min: 10,
+	  	max: 50,
+	  	},
+	   	{
+	  	color: "#b75d13",
+	  	min: 50,
+	   	max: 999,
+	  	},
+	  ]
+}
+renderContributionGraph(this.container, calendarData)
 ```
 
 
