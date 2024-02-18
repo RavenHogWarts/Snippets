@@ -8,7 +8,7 @@
 
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
-
+![alt text](../attachment/Contribution-Widget&Garph-image.png)
 
 ```js
 const currentYear = new Date().getFullYear()
