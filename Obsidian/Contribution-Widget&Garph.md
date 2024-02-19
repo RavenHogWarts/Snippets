@@ -215,7 +215,7 @@ table
   file.tags as Tags,
   dateformat(file.ctime, "yyyy-MM-dd") as CreatedDate
 from
-  !"_templates" and !"_excalidraw"
+  ""
 `
 if (fileName && !author && !tag) {
   query += ` where (icontains(${filenameField}, "${fileName}"))`
