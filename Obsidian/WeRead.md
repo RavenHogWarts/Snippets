@@ -9,6 +9,11 @@
 ![alt text](../attachment/WeRead-231225171958.png)
 
 ```js
+---
+title: {{metaData.title}}
+pcUrl: {{metaData.pcUrl}}
+lastReadDate: {{metaData.lastReadDate}}
+---
 > [!abstract] {{metaData.title}}
 > - ![ {{metaData.title}}|200]({{metaData.cover}})
 
@@ -35,6 +40,11 @@
 ## 模板2
 此模板要求每个想法都要高亮
 ```js
+---
+title: {{metaData.title}}
+pcUrl: {{metaData.pcUrl}}
+lastReadDate: {{metaData.lastReadDate}}
+---
 > [!abstract] {{metaData.title}}
 > - ![ {{metaData.title}}|200]({{metaData.cover}})
 
@@ -51,6 +61,10 @@
 
 ```js
 ---
+title: {{metaData.title}}
+pcUrl: {{metaData.pcUrl}}
+lastReadDate: {{metaData.lastReadDate}}
+---
 > [!abstract] {{metaData.title}}
 > - ![ {{metaData.title}}|200]({{metaData.cover}})
 {% for chapter1 in chapterHighlights %}
@@ -66,6 +80,11 @@
 ![alt text](../attachment/WeRead-240206171303.png)
 
 ```js
+---
+title: {{metaData.title}}
+pcUrl: {{metaData.pcUrl}}
+lastReadDate: {{metaData.lastReadDate}}
+---
 > [!abstract] {{metaData.title}}
 > - ![ {{metaData.title}}|200]({{metaData.cover}})
 {% for chapter1 in chapterHighlights %}
