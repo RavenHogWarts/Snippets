@@ -213,7 +213,7 @@ let tagField = 'file.tags'
 let query = `
 table
   file.tags as Tags,
-  dateformat(created-date, "yyyy-MM-dd") as CreatedDate
+  dateformat(file.ctime, "yyyy-MM-dd") as CreatedDate
 from
   !"_templates" and !"_excalidraw"
 `
