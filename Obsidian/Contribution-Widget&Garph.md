@@ -206,32 +206,36 @@ const fileName = '{{FileName}}'
 const author = '{{Author}}'
 const tag = '{{TagA}}'
 const maxResults = {{MaxNum}}
+// 在下面三个Field中替换为自己的属性，比如`author`可替换为`作者`
+let filenameField = 'file.name'
+let authorField = 'author'
+let tagField = 'file.tags'
 let query = `
 table
   file.tags as Tags,
-  dateformat(file.ctime, "yyyy-MM-dd") as CreatedDate
+  dateformat(created-date, "yyyy-MM-dd") as CreatedDate
 from
-  ""
+  !"_templates" and !"_excalidraw"
 `
 if (fileName && !author && !tag) {
-  query += ` where (icontains(file.name, "${fileName}"))`
+  query += ` where (icontains(${filenameField}, "${fileName}"))`
 } else if (!fileName && author && !tag) {
-  query += ` where (icontains(author, "${author}"))`
+  query += ` where (icontains(${authorField}, "${author}"))`
 } else if (!fileName && !author && tag) {
-  query += ` where (contains(file.tags, "${tag}"))`
+  query += ` where (contains(${tagField}, "${tag}"))`
 } else if (fileName && author && !tag) {
-  query += ` where (icontains(file.name, "${fileName}") and icontains(author, "${author}"))`
+  query += ` where (icontains(${filenameField}, "${fileName}") and icontains(${authorField}, "${author}"))`
 } else if (fileName && !author && tag) {
-  query += ` where (icontains(file.name, "${fileName}") and contains(file.tags, "${tag}"))`
+  query += ` where (icontains(${filenameField}, "${fileName}") and contains(${tagField}, "${tag}"))`
 } else if (!fileName && author && tag) {
-  query += ` where (icontains(author, "${author}") and contains(file.tags, "${tag}"))`
+  query += ` where (icontains(${authorField}, "${author}") and contains(${tagField}, "${tag}"))`
 } else if (fileName && author && tag) {
-  query += ` where (icontains(file.name, "${fileName}") and icontains(author, "${author}") and contains(file.tags, "${tag}"))`
+  query += ` where (icontains(${filenameField}, "${fileName}") and icontains(${authorField}, "${author}") and contains(${tagField}, "${tag}"))`
 } else {
   query += ``
 }
 query += ` limit ${maxResults}`
-dv.execute(query)
+await dv.execute(query)
 ```
 
 
