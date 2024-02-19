@@ -62,9 +62,10 @@ renderContributionGraph(this.container, options)
 ```
 
 ## 热力图-标签检索
-动态参数: Tag
-- 组件类型: 标签列表
-- 参数名称: Tag
+1个动态参数: 
+- Tag
+  - 组件类型: 标签列表
+  - 参数名称: Tag
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-1.png)
 
@@ -114,10 +115,11 @@ renderContributionGraph(this.container, calendarData)
 ```
 
 ## 热力图-最近几个整月贡献
-动态参数: MonthNum
-- 组件类型: 数字
-- 参数名称: MonthNum
-- 提示语: 限制范围:1~24
+1个动态参数: 
+- MonthNum
+  - 组件类型: 数字
+  - 参数名称: MonthNum
+  - 提示语: 限制范围:1~24
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-2.png)
 
@@ -181,6 +183,55 @@ const calendarData = {
     ]
 }
 renderContributionGraph(this.container, calendarData)
+```
+## 文件检索器
+4个动态参数:
+- FileName(模糊匹配)
+  - 组件类型: 文本
+  - 参数名称: FileName
+- Author(模糊匹配)
+  - 组件类型: 文本
+  - 参数名称: Author
+- TagA
+  - 组件类型: 标签列表
+  - 参数名称: TagA
+- MaxNum
+  - 组件类型: 数字
+  - 参数名称: MaxNum
+
+![alt text](../attachment/Contribution-Widget&Garph-image-3.png)
+
+```js
+const fileName = '{{FileName}}'
+const author = '{{Author}}'
+const tag = '{{TagA}}'
+const maxResults = {{MaxNum}}
+let query = `
+table
+  file.tags as Tags,
+  dateformat(file.ctime, "yyyy-MM-dd") as CreatedDate
+from
+  ""
+`
+if (fileName && !author && !tag) {
+  query += ` where (icontains(file.name, "${fileName}"))`
+} else if (!fileName && author && !tag) {
+  query += ` where (icontains(author, "${author}"))`
+} else if (!fileName && !author && tag) {
+  query += ` where (contains(file.tags, "${tag}"))`
+} else if (fileName && author && !tag) {
+  query += ` where (icontains(file.name, "${fileName}") and icontains(author, "${author}"))`
+} else if (fileName && !author && tag) {
+  query += ` where (icontains(file.name, "${fileName}") and contains(file.tags, "${tag}"))`
+} else if (!fileName && author && tag) {
+  query += ` where (icontains(author, "${author}") and contains(file.tags, "${tag}"))`
+} else if (fileName && author && tag) {
+  query += ` where (icontains(file.name, "${fileName}") and icontains(author, "${author}") and contains(file.tags, "${tag}"))`
+} else {
+  query += ``
+}
+query += ` limit ${maxResults}`
+dv.execute(query)
 ```
 
 
