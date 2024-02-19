@@ -3,6 +3,7 @@
 - `Contribution Widget` v0217
 - `Contribution Garph` v0.8.8
 - `dataview` v0.5.64
+- `Weread` v0.8.4
 
 # 代码片段
 
@@ -79,7 +80,6 @@ return {
 	value: entry.rows.length, 
 	items: entry.rows.map(p => ({
         label: p.file.name,
-        value: 123,
         link: p.file.path}))
     }
 }).values
@@ -237,6 +237,5 @@ if (fileName && !author && !tag) {
 query += ` limit ${maxResults}`
 await dv.execute(query)
 ```
-
 
 [^readme_advance]: [obsidian-contribution-graph/README_ADVANCE.md](https://github.com/vran-dev/obsidian-contribution-graph/blob/master/README_ADVANCE.md)
