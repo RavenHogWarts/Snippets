@@ -3,7 +3,15 @@
 - `Contribution Widget` v0217
 - `Contribution Garph` v0.8.8
 - `dataview` v0.5.64
-- `Weread` v0.8.4
+- `Weread` v0.8.4 (非必需)
+
+# 使用说明
+1. 安装好三个必要前置插件
+dataview插件需在设置中开启`Enable Inline JavaScript Queries`
+
+2. 鼠标右键创建挂件，选择dataview组件
+![alt text](../attachment/Contribution-Widget&Garph-image-5.png)
+
 
 # 代码片段
 
@@ -206,10 +214,9 @@ const fileName = '{{FileName}}'
 const author = '{{Author}}'
 const tag = '{{TagA}}'
 const maxResults = {{MaxNum}}
-// 在下面三个Field中替换为自己的属性，比如`author`可替换为`作者`
-let filenameField = 'file.name'
-let authorField = 'author'
-let tagField = 'file.tags'
+let filenameField = 'file.name' // `file.name` can be replaced with your filename field
+let authorField = 'author' 		// `author` can be replaced with your author field
+let tagField = 'file.tags' 		// `file.tags` can be replaced with your tag field
 let query = `
 table
   file.tags as Tags,
@@ -236,6 +243,71 @@ if (fileName && !author && !tag) {
 }
 query += ` limit ${maxResults}`
 await dv.execute(query)
+```
+
+## 微信读书笔记热力图
+需安装WeRead插件
+
+![alt text](../attachment/Contribution-Widget&Garph-image-4.png)
+
+```js
+const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced with your path
+  .groupBy(p => formatDate(p["readingDate"])) // `readingDate` can be replaced with your date field
+  .map(group => {
+    const createdDate = group.key
+    let countsSum = 0
+    const items = []
+    group.rows.forEach(page => {
+      countsSum += page["reviewCount"]+page["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
+      items.push({
+        label: page.file.name,
+        value: page["reviewCount"]+page["noteCount"], // `reviewCount`and`noteCount` can be replaced with your value field
+        link: page.file.path,
+      })
+    })
+    return {
+      date: createdDate,
+      value: countsSum,
+      items: items
+    }
+  }).values
+function formatDate(date) {
+  const mdate = new Date(date)
+  const year = String(mdate.getFullYear())
+  const month = String(mdate.getMonth() + 1).padStart(2, '0')
+  const day = String(mdate.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+const calendarData = {
+    day: 366,
+    title: `近一年读书笔记`,
+    titleStyle:{
+		fontSize: '14px',
+		textAlign: 'center',
+    },
+    data: data, 
+    graphType: 'default',
+    startOfWeek: 1,
+    cellStyleRules: [
+    	{color: "#8dd1e2",
+    	min: 1,
+    	max: 6,
+    	},
+    	{color: "#63a1be",
+    	min: 6,
+    	max: 31,
+    	},
+    	{color: "#376d93",
+    	min: 31,
+    	max: 101,
+    	},
+    	{color: "#012f60",
+    	min: 101,
+    	max: 999,
+    	},
+    ]
+}
+renderContributionGraph(this.container, calendarData)
 ```
 
 [^readme_advance]: [obsidian-contribution-graph/README_ADVANCE.md](https://github.com/vran-dev/obsidian-contribution-graph/blob/master/README_ADVANCE.md)
