@@ -10,6 +10,7 @@
 dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 2. 鼠标右键创建挂件，选择dataview组件
+
 ![alt text](../attachment/Contribution-Widget&Garph-image-5.png)
 
 
