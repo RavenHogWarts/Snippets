@@ -1,7 +1,7 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0217
-- `Contribution Garph` v0.8.8
+- `Contribution Widget` v0220
+- `Contribution Garph` v0.8.0
 - `dataview` v0.5.64
 - `Weread` v0.8.4 (非必需)
 
@@ -77,6 +77,7 @@ renderContributionGraph(this.container, options)
 - Tag
   - 组件类型: 标签列表
   - 参数名称: Tag
+  - 需要设置默认值!
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-1.png)
 
@@ -129,6 +130,7 @@ renderContributionGraph(this.container, calendarData)
 - MonthNum
   - 组件类型: 数字
   - 参数名称: MonthNum
+  - 需要设置默认值!
   - 提示语: 限制范围:1~24
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-2.png)
@@ -199,15 +201,19 @@ renderContributionGraph(this.container, calendarData)
 - FileName(模糊匹配)
   - 组件类型: 文本
   - 参数名称: FileName
+  - 无需默认值
 - Author(模糊匹配)
   - 组件类型: 文本
   - 参数名称: Author
+  - 无需默认值
 - TagA
   - 组件类型: 标签列表
   - 参数名称: TagA
+  - 无需默认值
 - MaxNum
   - 组件类型: 数字
   - 参数名称: MaxNum
+  - 需要设置默认值!
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-3.png)
 
