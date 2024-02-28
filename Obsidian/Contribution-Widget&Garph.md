@@ -1,9 +1,9 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0220
-- `Contribution Garph` v0.8.0
+- `Contribution Widget` v0227
+- `Contribution Garph` v0.9.0
 - `dataview` v0.5.64
-- `Weread` v0.8.4 (非必需)
+- `Weread` v0.9.0 (非必需)
 
 # 使用说明
 - 安装好三个必要前置插件
@@ -14,8 +14,11 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 ![alt text](../attachment/Contribution-Widget&Garph-image-5.png)
 
+- 根据代码注释修改参数
+
 
 # 代码片段
+均使用dataviewjs
 
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
@@ -318,4 +321,37 @@ const calendarData = {
 renderContributionGraph(this.container, calendarData)
 ```
 
+## 和风天气视图(转)
+下载LumosLovegood大佬的js脚本[^WeatherView]
+
+需要先按照WeatherView/Readme文档获取和风天气api以及js脚本
+
+2个动态参数：
+- City
+  - 组件类型: 文本
+  - 参数名称: City
+  - 需要默认值
+- Days
+  - 组件类型: 数字
+  - 参数名称: Days
+  - 需要默认值（2~7）
+
+![alt text](../attachment/Contribution-Widget&Garph-image-6.png)
+
+```js
+let setting = {};
+setting.key = ""; //Api key
+setting.city = `{{City}}`;
+setting.days = {{Days}};
+setting.headerLevel = 0; //添加标题的等级,0为不添加
+setting.addDesc = false; //是否添加描述
+setting.onlyToday = false; //是否只在当天显示
+setting.anotherCity = "北京"; //添加另外一个城市
+
+// 脚本文件 weatherView.js 所在路径
+dv.view("../_templates/Snippets/weatherView",setting)
+```
+
+
 [^readme_advance]: [obsidian-contribution-graph/README_ADVANCE.md](https://github.com/vran-dev/obsidian-contribution-graph/blob/master/README_ADVANCE.md)
+[^WeatherView]: [LumosLovegood/myScripts/WeatherView](https://github.com/LumosLovegood/myScripts/blob/main/WeatherView/Readme.md)
