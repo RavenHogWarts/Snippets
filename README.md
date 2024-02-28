@@ -7,4 +7,4 @@
 [Dataview插件](./Obsidian/Dataview.md)
 
 ## Bitburner
-[Bitburner](./Bitburner/)
+[Bitburner](./Bitburner/Bitburner-Readme.md)
