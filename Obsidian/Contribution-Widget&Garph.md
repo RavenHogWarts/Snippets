@@ -290,7 +290,7 @@ function formatDate(date) {
   return `${year}-${month}-${day}`
 }
 const calendarData = {
-    day: 366,
+    days: 366,
     title: `近一年读书笔记`,
     titleStyle:{
 		fontSize: '14px',
