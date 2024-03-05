@@ -5,8 +5,9 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 
 # 模板
 ## `zt-annot.eta`
-![alt text](../attachment/Zotlit-image-5.png)
 需要根据自己的标注配色方案更改
+
+![alt text](../attachment/Zotlit-image-5.png)
 
 ```
 [!note] <% if (it.color == '#ffd400') { %>概念<% } %><% else if(it.color == '#5fb236') { %>创新点<% }%><% else if(it.color == '#2ea8e5') { %>研究方法<% }%><% else if(it.color == '#a28ae5') { %>研究假设<% }%><% else if(it.color == '#d2d8e2') { %>图表标注<% }%><% else if(it.color == '#f19837') { %>重要结论<% }%><% else if(it.color == '#aaaaaa') { %>有疑问<% }%>
@@ -49,8 +50,9 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 ```
 
 ## `zt-field.eta`
-![alt text](../attachment/Zotlit-image-1.png)
 YAML区样式为Obsidian主题Ebullientworks提供,不同主题不一样
+
+![alt text](../attachment/Zotlit-image-1.png)
 
 ```
 created-date: <%= it.dateAdded.substring(0,10) %>
