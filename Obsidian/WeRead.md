@@ -1,4 +1,4 @@
-[模板分享区](https://github.com/zhaohongxuan/obsidian-weread-plugin/discussions/62#discussioncomment-7236718)
+GitHub分享模板区[^模板分享区]
 
 # 前置插件
 - `Weread` v0.8.4
@@ -99,3 +99,5 @@ lastReadDate: {{metaData.lastReadDate}}
 >   ==🦊{{review.content}}==
 {% endfor %}{%endif %}{% endif %}{% endfor%}{% endfor%}
 ```
+
+[^模板分享区]: [obsidian-weread-plugin/discussions/62#discussioncomment-7236718](https://github.com/zhaohongxuan/obsidian-weread-plugin/discussions/62#discussioncomment-7236718)

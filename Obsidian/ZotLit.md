@@ -1,4 +1,4 @@
-[Obsidian ZotLit模板速查表](https://zotlit.aidenlx.top/zh-CN/how-to/template-cheatsheet)
+Obsidian ZotLit模板速查表[^template-cheatsheet]
 
 # 前置插件
 - `ZotLit` 1.1.4
@@ -102,3 +102,5 @@ tags:<% if (it.tags) { %>
 # Highlights & Ideas
 
 ```
+
+[^template-cheatsheet]: [template-cheatsheet](https://zotlit.aidenlx.top/zh-CN/how-to/template-cheatsheet)
