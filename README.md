@@ -6,5 +6,7 @@
 
 [Dataview插件](./Obsidian/Dataview.md)
 
+[ZotLit插件](./Obsidian/ZotLit.md)
+
 ## Bitburner
 [Bitburner](./Bitburner/Bitburner-Readme.md)
