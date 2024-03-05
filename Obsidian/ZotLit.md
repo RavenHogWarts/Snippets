@@ -50,7 +50,7 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 ```
 
 ## `zt-field.eta`
-YAML区样式为Obsidian主题Ebullientworks提供,不同主题不一样
+YAML区样式由主题Ebullientworks提供,不同主题不一样
 
 ![alt text](../attachment/Zotlit-image-1.png)
 
