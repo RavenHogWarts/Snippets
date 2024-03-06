@@ -5,9 +5,9 @@
 片段来自Blue-topaz主题示例库[^Blue-topaz-example-vault]
 
 前置插件:
-- Dataview
-- Advanced URI
-- Buttons
+- `Dataview` v0.5.64
+- `Advanced URI` v1.40.0
+- `Buttons` v0.5.1
 
 ![alt text](../attachment/Dataview-image.png)
 
