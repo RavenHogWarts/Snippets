@@ -267,11 +267,15 @@ const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced 
   .map(group => {
     const createdDate = group.key
     let countsSum = 0
+    let labeltemp
+    let valuetemp
     const items = []
     group.rows.forEach(page => {
       countsSum += page["reviewCount"]+page["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
+      valuetemp = page["reviewCount"]+page["noteCount"]
+      labeltemp += ` [Counts:${valuetemp}]`
       items.push({
-        label: page.file.name,
+        label: labeltemp,
         value: page["reviewCount"]+page["noteCount"], // `reviewCount`and`noteCount` can be replaced with your value field
         link: page.file.path,
       })
