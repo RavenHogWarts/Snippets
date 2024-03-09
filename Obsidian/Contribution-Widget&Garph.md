@@ -1,6 +1,6 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0227
+- `Contribution Widget` v0.308
 - `Contribution Garph` v0.9.0
 - `dataview` v0.5.64
 - `Weread` v0.9.0 (非必需)
@@ -38,7 +38,9 @@ return {
 	value: entry.rows.length,
 	items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path}))
+        link: p.file.path,
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        }))
 	}
 })
 const options = {
@@ -94,7 +96,9 @@ return {
 	value: entry.rows.length, 
 	items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path}))
+        link: p.file.path,
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        }))
     }
 }).values
 const calendarData = {
@@ -163,7 +167,9 @@ date: entry.key,
 value: entry.rows.length,
 items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path}))
+        link: p.file.path,
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        }))
   }
 })
 
@@ -270,14 +276,16 @@ const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced 
     let labeltemp
     let valuetemp
     const items = []
-    group.rows.forEach(page => {
-      countsSum += page["reviewCount"]+page["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
-      valuetemp = page["reviewCount"]+page["noteCount"]
+    group.rows.forEach(p => {
+      countsSum += p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
+      valuetemp = p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
       labeltemp += ` [Counts:${valuetemp}]`
+      const openLink = (e) => { app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf) };
       items.push({
         label: labeltemp,
-        value: page["reviewCount"]+page["noteCount"], // `reviewCount`and`noteCount` can be replaced with your value field
-        link: page.file.path,
+        value: valuetemp,
+        link: p.file.path,
+        open: openLink,
       })
     })
     return {
