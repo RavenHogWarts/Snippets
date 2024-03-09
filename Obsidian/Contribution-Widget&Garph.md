@@ -39,7 +39,7 @@ return {
 	items: entry.rows.map(p => ({
         label: p.file.name,
         link: p.file.path,
-        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
 	}
 })
@@ -97,7 +97,7 @@ return {
 	items: entry.rows.map(p => ({
         label: p.file.name,
         link: p.file.path,
-        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
     }
 }).values
@@ -168,7 +168,7 @@ value: entry.rows.length,
 items: entry.rows.map(p => ({
         label: p.file.name,
         link: p.file.path,
-        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf)}
+        open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
   }
 })
@@ -280,7 +280,7 @@ const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced 
       countsSum += p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
       valuetemp = p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
       labeltemp += ` [Counts:${valuetemp}]`
-      const openLink = (e) => { app.workspace.openLinkText(p.file.name, p.file.path, app.workspace.activeLeaf) };
+      const openLink = (e) => { app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey) };
       items.push({
         label: labeltemp,
         value: valuetemp,
