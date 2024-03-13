@@ -263,8 +263,9 @@ await dv.execute(query)
 - **注意**！SortFiled的下拉选项需要手动维护
 
 7个动态参数
-
 ![](Contribution-Widget&Garph-240313210739.png)
+
+![](Contribution-Widget&Garph-240313211353.png)
 
 ```js
 const dateFormat = "YYYY-MM-DD"
@@ -331,6 +332,8 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 
 ## 微信读书笔记热力图
 需安装WeRead插件
+
+![](Contribution-Widget&Garph-240313211323.png)
 
 ```js
 const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced with your path
@@ -404,14 +407,7 @@ renderContributionGraph(this.container, calendarData)
 需要先按照WeatherView/Readme文档获取和风天气api以及js脚本
 
 2个动态参数：
-- City
-  - 组件类型: 文本
-  - 参数名称: City
-  - 需要默认值
-- Days
-  - 组件类型: 数字
-  - 参数名称: Days
-  - 需要默认值（2~7）
+![](Contribution-Widget&Garph-240313211137.png)
 
 ![](Contribution-Widget&Garph-240313210803.png)
 
