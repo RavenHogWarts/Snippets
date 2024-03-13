@@ -14,7 +14,7 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 - 鼠标右键创建挂件，选择dataview组件
 
-![](Contribution-Widget&Garph-240313210228.png)
+![Contribution-Widget&Garph-240313210228](attachment/Contribution-Widget&Garph-240313210228.png)
 
 - 根据代码注释修改参数
 
@@ -24,7 +24,7 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
-![](Contribution-Widget&Garph-240313211800.png)
+![Contribution-Widget&Garph-240313211800](attachment/Contribution-Widget&Garph-240313211800.png)
 
 ```js
 const currentYear = new Date().getFullYear()
@@ -81,9 +81,9 @@ renderContributionGraph(this.container, options)
 
 ## 热力图-标签检索
 1个动态参数: 
-![](Contribution-Widget&Garph-240313211852.png)
+![Contribution-Widget&Garph-240313211852](attachment/Contribution-Widget&Garph-240313211852.png)
 
-![](Contribution-Widget&Garph-240313211819.png)
+![Contribution-Widget&Garph-240313211819](attachment/Contribution-Widget&Garph-240313211819.png)
 
 ```js
 const tag = '{{Tag}}'
@@ -133,9 +133,9 @@ renderContributionGraph(this.container, calendarData)
 
 ## 热力图-最近几个整月贡献
 1个动态参数: 
-![](Contribution-Widget&Garph-240313211917.png)
+![Contribution-Widget&Garph-240313211917](attachment/Contribution-Widget&Garph-240313211917.png)
 
-![](Contribution-Widget&Garph-240313211827.png)
+![Contribution-Widget&Garph-240313211827](attachment/Contribution-Widget&Garph-240313211827.png)
 
 ```js
 const MonthNumPre = {{MonthNum}}
@@ -201,9 +201,9 @@ renderContributionGraph(this.container, calendarData)
 ```
 ## 文件检索器
 4个动态参数:
-![](Contribution-Widget&Garph-240313211630.png)
+![Contribution-Widget&Garph-240313211630](attachment/Contribution-Widget&Garph-240313211630.png)
 
-![](Contribution-Widget&Garph-240313211712.png)
+![Contribution-Widget&Garph-240313211712](attachment/Contribution-Widget&Garph-240313211712.png)
 
 ```js
 const fileName = '{{FileName}}'
@@ -247,9 +247,9 @@ await dv.execute(query)
 - **注意**！SortFiled的下拉选项需要手动维护
 
 7个动态参数
-![](Contribution-Widget&Garph-240313210739.png)
+![Contribution-Widget&Garph-240313210739](attachment/Contribution-Widget&Garph-240313210739.png)
 
-![](Contribution-Widget&Garph-240313211353.png)
+![Contribution-Widget&Garph-240313211353](attachment/Contribution-Widget&Garph-240313211353.png)
 
 ```js
 const dateFormat = "YYYY-MM-DD"
@@ -317,7 +317,7 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 ## 微信读书笔记热力图
 需安装WeRead插件
 
-![](Contribution-Widget&Garph-240313211323.png)
+![Contribution-Widget&Garph-240313211323](attachment/Contribution-Widget&Garph-240313211323.png)
 
 ```js
 const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced with your path
@@ -391,9 +391,9 @@ renderContributionGraph(this.container, calendarData)
 需要先按照WeatherView/Readme文档获取和风天气api以及js脚本
 
 2个动态参数：
-![](Contribution-Widget&Garph-240313211137.png)
+![Contribution-Widget&Garph-240313211137](attachment/Contribution-Widget&Garph-240313211137.png)
 
-![](Contribution-Widget&Garph-240313210803.png)
+![Contribution-Widget&Garph-240313210803](attachment/Contribution-Widget&Garph-240313210803.png)
 
 ```js
 let setting = {};
