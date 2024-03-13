@@ -14,7 +14,7 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 - 鼠标右键创建挂件，选择dataview组件
 
-![[Contribution-Widget&Garph-240313210228.png]]
+![](Contribution-Widget&Garph-240313210228.png)
 
 - 根据代码注释修改参数
 
@@ -24,7 +24,6 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
-![alt text](../attachment/Contribution-Widget&Garph-image.png)
 
 ```js
 const currentYear = new Date().getFullYear()
@@ -86,8 +85,6 @@ renderContributionGraph(this.container, options)
   - 参数名称: Tag
   - 需要设置默认值!
 
-![alt text](../attachment/Contribution-Widget&Garph-image-1.png)
-
 ```js
 const tag = '{{Tag}}'
 const data = dv.pages(tag)
@@ -141,8 +138,6 @@ renderContributionGraph(this.container, calendarData)
   - 参数名称: MonthNum
   - 需要设置默认值!
   - 提示语: 限制范围:1~24
-
-![alt text](../attachment/Contribution-Widget&Garph-image-2.png)
 
 
 ```js
@@ -226,8 +221,6 @@ renderContributionGraph(this.container, calendarData)
   - 参数名称: MaxNum
   - 需要设置默认值!
 
-![alt text](../attachment/Contribution-Widget&Garph-image-3.png)
-
 ```js
 const fileName = '{{FileName}}'
 const author = '{{Author}}'
@@ -271,9 +264,7 @@ await dv.execute(query)
 
 7个动态参数
 
-![alt text](../attachment/Contribution-Widget&Garph-image-8.png)
-
-![alt text](../attachment/Contribution-Widget&Garph-image-7.png)
+![](Contribution-Widget&Garph-240313210739.png)
 
 ```js
 const dateFormat = "YYYY-MM-DD"
@@ -340,8 +331,6 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 
 ## 微信读书笔记热力图
 需安装WeRead插件
-
-![alt text](../attachment/Contribution-Widget&Garph-image-4.png)
 
 ```js
 const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced with your path
@@ -424,7 +413,7 @@ renderContributionGraph(this.container, calendarData)
   - 参数名称: Days
   - 需要默认值（2~7）
 
-![alt text](../attachment/Contribution-Widget&Garph-image-6.png)
+![](Contribution-Widget&Garph-240313210803.png)
 
 ```js
 let setting = {};

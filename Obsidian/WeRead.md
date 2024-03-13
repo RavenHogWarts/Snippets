@@ -6,7 +6,7 @@ GitHub分享模板区[^模板分享区]
 
 # 模板片段
 ## 模板1
-![alt text](../attachment/WeRead-231225171958.png)
+![](WeRead-240313210528.png)
 
 ```js
 ---
@@ -57,7 +57,7 @@ lastReadDate: {{metaData.lastReadDate}}
 ```
 
 ## 模板3
-![alt text](../attachment/WeRead-240117163324.png)
+![](WeRead-240313210539.png)
 
 ```js
 ---
@@ -77,7 +77,7 @@ lastReadDate: {{metaData.lastReadDate}}
 ```
 
 ## 模板4
-![alt text](../attachment/WeRead-240206171303.png)
+![](WeRead-240313210550.png)
 
 ```js
 ---
