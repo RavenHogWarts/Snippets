@@ -24,6 +24,7 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
+![](Contribution-Widget&Garph-240313211800.png)
 
 ```js
 const currentYear = new Date().getFullYear()
@@ -80,10 +81,9 @@ renderContributionGraph(this.container, options)
 
 ## 热力图-标签检索
 1个动态参数: 
-- Tag
-  - 组件类型: 标签列表
-  - 参数名称: Tag
-  - 需要设置默认值!
+![](Contribution-Widget&Garph-240313211852.png)
+
+![](Contribution-Widget&Garph-240313211819.png)
 
 ```js
 const tag = '{{Tag}}'
@@ -133,12 +133,9 @@ renderContributionGraph(this.container, calendarData)
 
 ## 热力图-最近几个整月贡献
 1个动态参数: 
-- MonthNum
-  - 组件类型: 数字
-  - 参数名称: MonthNum
-  - 需要设置默认值!
-  - 提示语: 限制范围:1~24
+![](Contribution-Widget&Garph-240313211917.png)
 
+![](Contribution-Widget&Garph-240313211827.png)
 
 ```js
 const MonthNumPre = {{MonthNum}}
