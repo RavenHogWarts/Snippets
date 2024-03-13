@@ -1,6 +1,6 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0.308
+- `Contribution Widget` v0.312
 - `Contribution Garph` v0.9.0
 - `dataview` v0.5.64
 - `Weread` v0.9.0 (非必需)
@@ -261,6 +261,80 @@ if (fileName && !author && !tag) {
 query += ` limit ${maxResults}`
 await dv.execute(query)
 ```
+
+## 文件检索器(升级)
+- 参考vran给出的代码
+- 增加了分页功能
+- **注意**！SortFiled的下拉选项需要手动维护
+
+7个动态参数
+
+![alt text](../attachment/Contribution-Widget&Garph-image-8.png)
+
+![alt text](../attachment/Contribution-Widget&Garph-image-7.png)
+
+```js
+const dateFormat = "YYYY-MM-DD"
+const headers = ["tags"] // 期望的展示的属性列表
+const pageNum = {{PageNum}} // 当前页码
+const pageSize = {{PageSize}} // 单页数量
+const pageTitleLike = "{{FileName}}"
+const authorLike = "{{Author}}"
+const tagLike = "{{TagA}}"
+const titleMatch = (page, title) => {
+    if (title) {
+        return page.file.name?.toLowerCase().includes(title?.toLowerCase())
+    }
+    return true
+}
+const authorMatch = (page, author) => {
+    if (author && page["author"]) { // page["author"]中的author可替换为自己的属性
+	    const pageAuthor = String(page["author"])
+	    const regex = new RegExp(`.*${author}.*`, 'i')
+	    return regex.test(pageAuthor)
+    }else{
+	    return false
+    }
+}
+const tagMatch = (page, tag) => {
+	if (tag){
+		return page.file.tags && page.file.tags.some(t => t.includes(tag))
+	}
+	return true
+}
+const filteredData = dv.pages(`""`) //替换为你需要的查询位置
+    .where(p => {
+        if (pageTitleLike && !authorLike && !tagLike) {
+            return titleMatch(p, pageTitleLike)
+        } else if (!pageTitleLike && authorLike && !tagLike) {
+            return authorMatch(p, authorLike)
+        } else if (!pageTitleLike && !authorLike && tagLike) {
+            return tagMatch(p, tagLike)
+        } else if (pageTitleLike && authorLike && !tagLike) {
+            return titleMatch(p, pageTitleLike) && authorMatch(p, authorLike)
+        }
+         else if (pageTitleLike && !authorLike && tagLike) {
+            return titleMatch(p, pageTitleLike) && tagMatch(p, tagLike)
+        }
+         else if (!pageTitleLike && authorLike && tagLike) {
+            return authorMatch(p, authorLike) && tagMatch(p, tagLike)
+        }
+         else if (pageTitleLike && authorLike && tagLike) {
+            return titleMatch(p, pageTitleLike) && authorMatch(p, authorLike) && tagMatch(p, tagLike)
+        }else{
+	        return true
+        }
+    })
+    .sort(p => {{SortFiled}},"{{Sort}}")
+    .map(p => {
+        return [p.file.link, ...headers.map(property => p[property]), moment(Number(p.file.ctime)).format(dateFormat)]
+    })
+const totalData = filteredData.length;
+const pageData = filteredData.slice((pageNum - 1) * pageSize, pageNum * pageSize);
+dv.paragraph("检索出 " + totalData + " 条数据");
+dv.table(["FileName", ...headers, "CreatedDate"], pageData);
+```
+
 
 ## 微信读书笔记热力图
 需安装WeRead插件
