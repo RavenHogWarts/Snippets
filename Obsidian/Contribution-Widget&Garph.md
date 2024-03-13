@@ -6,6 +6,8 @@
 - `Weread` v0.9.0 (非必需)
 
 # 使用说明
+本库存放Widget插件的dataview组件代码
+
 - 安装好三个必要前置插件
 
 dataview插件需在设置中开启`Enable Inline JavaScript Queries`
