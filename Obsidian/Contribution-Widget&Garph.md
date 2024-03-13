@@ -204,22 +204,9 @@ renderContributionGraph(this.container, calendarData)
 ```
 ## 文件检索器
 4个动态参数:
-- FileName(模糊匹配)
-  - 组件类型: 文本
-  - 参数名称: FileName
-  - 无需默认值
-- Author(模糊匹配)
-  - 组件类型: 文本
-  - 参数名称: Author
-  - 无需默认值
-- TagA
-  - 组件类型: 标签列表
-  - 参数名称: TagA
-  - 无需默认值
-- MaxNum
-  - 组件类型: 数字
-  - 参数名称: MaxNum
-  - 需要设置默认值!
+![](Contribution-Widget&Garph-240313211630.png)
+
+![](Contribution-Widget&Garph-240313211712.png)
 
 ```js
 const fileName = '{{FileName}}'
