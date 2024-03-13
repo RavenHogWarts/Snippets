@@ -7,7 +7,7 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 ## `zt-annot.eta`
 需要根据自己的标注配色方案更改
 
-![](ZotLit-240313210404.png)
+![ZotLit-240313210404](../attachment/ZotLit-240313210404.png)
 
 ```
 [!note] <% if (it.color == '#ffd400') { %>概念<% } %><% else if(it.color == '#5fb236') { %>创新点<% }%><% else if(it.color == '#2ea8e5') { %>研究方法<% }%><% else if(it.color == '#a28ae5') { %>研究假设<% }%><% else if(it.color == '#d2d8e2') { %>图表标注<% }%><% else if(it.color == '#f19837') { %>重要结论<% }%><% else if(it.color == '#aaaaaa') { %>有疑问<% }%>
@@ -26,21 +26,21 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 ```
 
 ## `zt-cite.eta`
-![](ZotLit-240313210430.png)
+![ZotLit-240313210430](../attachment/ZotLit-240313210430.png)
 
 ```
 <%= it.map(lit => `[[@${lit.citekey}|(${lit.authors.map(v => v.lastName+v.firstName).first()}${lit.authors.length>1?" et al.":""}, ${lit.year?lit.year:lit.date})]]`).join("; ") %>
 ```
 
 ## `zt-cite2.eta`
-![](ZotLit-240313210440.png)
+![ZotLit-240313210440](../attachment/ZotLit-240313210440.png)
 
 ```
 <%= it.map(lit => `[[@${lit.citekey}|${lit.authors.map(v => v.lastName+v.firstName).first()}${lit.authors.length>1?", et al":""}. ${lit.year?lit.year:lit.date}. ${lit.title}.]]`).join("; ") %>
 ```
 
 ## `zt-colored.eta`
-![](ZotLit-240313210445.png)
+![ZotLit-240313210445](../attachment/ZotLit-240313210445.png)
 
 ```
 <mark style="
@@ -52,7 +52,7 @@ Obsidian ZotLit模板速查表[^template-cheatsheet]
 ## `zt-field.eta`
 YAML区样式由主题Ebullientworks提供,不同主题不一样
 
-![](ZotLit-240313210453.png)
+![ZotLit-240313210453](../attachment/ZotLit-240313210453.png)
 
 ```
 created-date: <%= it.dateAdded.substring(0,10) %>
@@ -84,7 +84,7 @@ tags:<% if (it.tags) { %>
 ```
 
 ## `zt-note.eta`
-![](ZotLit-240313210500.png)
+![ZotLit-240313210500](../attachment/ZotLit-240313210500.png)
 
 ```
 # <%= it.title %>
