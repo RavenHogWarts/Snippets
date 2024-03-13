@@ -9,7 +9,7 @@
 - `Advanced URI` v1.40.0
 - `Buttons` v0.5.1
 
-![](Dataview-240313210604.png)
+![Dataview-240313210604](../attachment/Dataview-240313210604.png)
 
 ```dataviewjs
 const {createButton} = app.plugins.plugins["buttons"];
