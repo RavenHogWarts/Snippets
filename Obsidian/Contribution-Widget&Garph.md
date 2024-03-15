@@ -324,8 +324,102 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 - 不一定有第一版稳定，可能会有奇奇怪怪的bug
 - 关于动态参数，参考第一版即可，删除了PageNum参数
 
+![Contribution-Widget&Garph-240315195633](../attachment/Contribution-Widget&Garph-240315195633.png)
 
+```js
+const headers = ["tags"]
+let pageNum = 1
+const pageSize = {{PageSize}}
+const pageTitleLike = "{{FileName}}"
+const authorLike = "{{Author}}"
+const tagLike = "{{TagA}}"
+const titleMatch = (page, title) => {
+    return title ? page.file.name?.toLowerCase().includes(title.toLowerCase()) : true;
+}
+const authorMatch = (page, author) => {// page["author"]中的author替换为自己的属性
+	return author&&page["author"] ? new RegExp(`.*${author}.*`, 'i').test(String(page["author"])) : false;
+}
+const tagMatch = (page, tag) => {
+	return tag ? page.file.tags && page.file.tags.some(t => t.includes(tag)) : true;
+}
+const filteredData = dv.pages(`""`) //替换为你需要的查询位置
+    .where(p => {
+        if (pageTitleLike && !authorLike && !tagLike) {
+            return titleMatch(p, pageTitleLike)
+        } else if (!pageTitleLike && authorLike && !tagLike) {
+            return authorMatch(p, authorLike)
+        } else if (!pageTitleLike && !authorLike && tagLike) {
+            return tagMatch(p, tagLike)
+        } else if (pageTitleLike && authorLike && !tagLike) {
+            return titleMatch(p, pageTitleLike) && authorMatch(p, authorLike)
+        }
+         else if (pageTitleLike && !authorLike && tagLike) {
+            return titleMatch(p, pageTitleLike) && tagMatch(p, tagLike)
+        }
+         else if (!pageTitleLike && authorLike && tagLike) {
+            return authorMatch(p, authorLike) && tagMatch(p, tagLike)
+        }
+         else if (pageTitleLike && authorLike && tagLike) {
+            return titleMatch(p, pageTitleLike) && authorMatch(p, authorLike) && tagMatch(p, tagLike)
+        }else{
+	        return true
+        }
+    })
+    .sort(p => {{SortFiled}},"{{Sort}}")
+    .map(p => {
+        return [p.file.link, ...headers.map(property => p[property]), formatDate(p["created-date"])]
+    })
+function formatDate(date) {
+    const mdate = new Date(date);
+    return `${mdate.getFullYear()}-${String(mdate.getMonth() + 1).padStart(2, '0')}-${String(mdate.getDate()).padStart(2, '0')}`;
+}
+const totalData = filteredData.length;
+const maxnum = Math.ceil(totalData / pageSize);
 
+let flexContainer = createFlexContainer("space-between");
+
+let paragraph = dv.el("span", "检索出 " + totalData + " 条数据");
+paragraph.style.flex = "1";
+flexContainer.appendChild(paragraph);
+
+let parentContainer = createFlexContainer("flex-end");
+let [button1, button2, pageSpan1, pageSpan2, pageSpan3] = createPaginationElements();
+parentContainer.append(button1, pageSpan1, pageSpan2, pageSpan3, button2);
+flexContainer.appendChild(parentContainer);
+
+function createPaginationElements() {
+    let button1 = dv.el("button", "上一页");
+    button1.onclick = () => {
+        pageNum = pageNum > 1 ? pageNum - 1 : maxnum;
+        fy();
+    };
+    let pageSpan1 = dv.el("span", pageNum);
+    let pageSpan2 = dv.el("span", " / ");
+    let pageSpan3 = dv.el("span", maxnum);
+    let button2 = dv.el("button", "下一页");
+    button2.onclick = () => {
+        pageNum = pageNum < maxnum ? pageNum + 1 : 1;
+        fy();
+    };
+    return [button1, button2, pageSpan1, pageSpan2, pageSpan3];
+}
+function createFlexContainer(justifyContent) {
+    let container = dv.el("div", "");
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    container.style.justifyContent = justifyContent;
+    return container;
+}
+
+let table = dv.el("div", "")
+function fy() {
+  document.querySelector(".dataview.table-view-table").remove();
+  let pageData = filteredData.slice((pageNum - 1) * pageSize, pageNum * pageSize);
+  dv.table(["FileName", ...headers, "CreatedDate"], pageData, ".dataview.table-view-table");
+  pageSpan1.innerText = pageNum;
+}
+fy();
+```
 
 ## 微信读书笔记热力图
 需安装WeRead插件
