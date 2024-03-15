@@ -367,7 +367,7 @@ const filteredData = dv.pages(`""`) //替换为你需要的查询位置
     })
     .sort(p => {{SortFiled}},"{{Sort}}")
     .map(p => {
-        return [p.file.link, ...headers.map(property => p[property]), formatDate(p["created-date"])]
+        return [p.file.link, ...headers.map(property => p[property]), moment(Number(p.file.ctime)).format(dateFormat)]
     })
 function formatDate(date) {
     const mdate = new Date(date);
