@@ -1,7 +1,7 @@
 GitHub分享模板区[^模板分享区]
 
 # 前置插件
-- `Weread` v0.9.0
+- `Weread` v0.10.0
 
 
 # 模板片段
@@ -96,7 +96,7 @@ lastReadDate: {{metaData.lastReadDate}}
 > - {{chapterReview.content}}{% endfor%}{%endif %}{% if chapter2.reviews %}{%for review in chapter2.reviews %}
 > [!NOTE] {{chapter2.chapterTitle}}
 > - {{review.abstract |trim }}
->   ==🦊{{review.content}}==
+>   ==🦊{{review.content}}==^{{review.reviewId}}
 {% endfor %}{%endif %}{% endif %}{% endfor%}{% endfor%}
 ```
 
