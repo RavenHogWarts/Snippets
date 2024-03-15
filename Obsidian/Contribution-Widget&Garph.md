@@ -245,9 +245,10 @@ query += ` limit ${maxResults}`
 await dv.execute(query)
 ```
 
-## 文件检索器(升级)
+## 文件检索器(翻页第一版)
 - 参考vran给出的代码
-- 增加了分页功能
+- 增加了分页功能，通过动态参数输入PageNum实现翻页效果
+- 特点：效果稳定
 - **注意**！SortFiled的下拉选项需要手动维护
 
 7个动态参数：
@@ -318,6 +319,11 @@ dv.paragraph("检索出 " + totalData + " 条数据");
 dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 ```
 
+## 文件检索器(翻页第二版)
+- 参考vran给出的代码
+- 增加了分页功能，通过动态参数输入PageNum实现翻页效果
+- 特点：效果稳定
+- **注意**！SortFiled的下拉选项需要手动维护
 
 ## 微信读书笔记热力图
 需安装WeRead插件
