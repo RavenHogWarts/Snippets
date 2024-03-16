@@ -413,7 +413,9 @@ function createFlexContainer(justifyContent) {
 
 let table = dv.el("div", "")
 function fy() {
-  document.querySelector(".dataview.table-view-table").remove();
+  if(document.querySelector(".dataview.table-view-table")){
+    document.querySelector(".dataview.table-view-table").remove();
+  }
   let pageData = filteredData.slice((pageNum - 1) * pageSize, pageNum * pageSize);
   dv.table(["FileName", ...headers, "CreatedDate"], pageData, ".dataview.table-view-table");
   pageSpan1.innerText = pageNum;
