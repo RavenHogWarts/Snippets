@@ -25,8 +25,6 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 ## 热力图-年度贡献
 自动获取今年年份，按照文件创建时间检索全库
 
-导入database: [Contribution-Widget导入database](Contribution-Widget导入database.md#热力图-年度贡献)
-
 ![Contribution-Widget&Garph-240313211800](../attachment/Contribution-Widget&Garph-240313211800.png)
 
 ```js
@@ -325,8 +323,6 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 - 对比第一版，使用button按钮实现翻页效果
 - 不一定有第一版稳定，可能会有奇奇怪怪的bug
 - 关于动态参数，参考第一版即可，删除了PageNum参数
-
-导入database: [Contribution-Widget导入database](Contribution-Widget导入database.md#文件检索器(翻页第二版))
 
 ![Contribution-Widget&Garph-240315195633](../attachment/Contribution-Widget&Garph-240315195633.png)
 

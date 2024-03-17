@@ -1,3 +1,13 @@
+# 使用方法
+- `ctrl+p`打开命令列表,输入widget,打开database
+
+![Contribution-Widget导入database-240317135020](../attachment/Contribution-Widget导入database-240317135020.png)
+
+- 复制代码片段粘贴，导入
+
+![](Contribution-Widget导入database-240317135134.png)
+
+# 代码片段
 ## 热力图-年度贡献
 
 ```contributionWidget
