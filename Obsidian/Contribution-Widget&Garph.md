@@ -18,6 +18,16 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 - 根据代码注释修改参数
 
+## 关于dv.pages
+dv.pages(`""`): 查询所有目录
+
+dv.pages(`"temp"`): 只查询temp目录
+
+dv.pages(`-"temp"`): 排除temp目录
+
+多个目录使用and连接,比如
+
+dv.pages(`-"temp" and -"demo"`): 排除temp和demo目录
 
 # 代码片段
 均使用dataviewjs
@@ -89,7 +99,7 @@ renderContributionGraph(this.container, options)
 
 ```js
 const tag = '{{Tag}}'
-const data = dv.pages(tag)
+const data = dv.pages(`${tag} and -"_templates"`) //可以在这里排除某些目录
 .groupBy(p => p.file.ctime.toFormat('yyyy-MM-dd'))
 .map(entry => {
 return { 
@@ -337,7 +347,7 @@ const tagLike = "{{TagA}}"
 const titleMatch = (page, title) => {
     return title ? page.file.name?.toLowerCase().includes(title.toLowerCase()) : true;
 }
-const authorMatch = (page, author) => {// page["author"]中的author替换为自己的属性
+const authorMatch = (page, author) => {// page["author"]中的author替换为自己的作者属性
 	return author&&page["author"] ? new RegExp(`.*${author}.*`, 'i').test(String(page["author"])) : false;
 }
 const tagMatch = (page, tag) => {

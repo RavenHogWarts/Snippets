@@ -7,6 +7,17 @@
 
 ![Contribution-Widget导入database-240317135134](../attachment/Contribution-Widget导入database-240317135134.png)
 
+## 关于dv.pages
+dv.pages(`""`): 查询所有目录
+
+dv.pages(`"temp"`): 只查询temp目录
+
+dv.pages(`-"temp"`): 排除temp目录
+
+多个目录使用and连接,比如
+
+dv.pages(`-"temp" and -"demo"`): 排除temp和demo目录
+
 # 代码片段
 ## 热力图-年度贡献
 
@@ -27,7 +38,7 @@ widgets:
       const EndDate = new Date(currentYear, 12, 0)
       const StartDateFormatted = StartDate.toISOString().split('T')[0]
       const EndDateFormatted = EndDate.toISOString().split('T')[0]
-      const data = dv.pages(`-"_templates" and -"_excalidraw"`)
+      const data = dv.pages(`""`) //替换为你需要的查询位置
       .groupBy(p => p.file.ctime.toFormat('yyyy-MM-dd'))
       .map(entry => {
       return {
@@ -78,6 +89,163 @@ layoutType: column
 
 ```
 
+## 热力图-标签检索
+```contributionWidget
+id: 4445ad6d-a9b7-40f8-b72f-d3b7a94bcb3e
+type: multi
+titleAlign: center
+tabTitle: ""
+maxWidthRatio: -1
+backgroundStyle: none
+widgets:
+  - id: 36bf1d36-730d-4490-aaad-04d726bf193f
+    type: dataview
+    titleAlign: center
+    query: |-
+      const tag='{{Tag}}'
+      const data = dv.pages(`${tag}`) //可以在这里排除某些目录,比如加上and -"_templates"
+      .groupBy(p => p.file.ctime.toFormat('yyyy-MM-dd'))
+      .map(entry => {
+      return { 
+      	date: entry.key, 
+      	value: entry.rows.length, 
+      	items: entry.rows.map(p => ({
+              label: p.file.name,
+              link: p.file.path,
+              open: (e) => { app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey) }}))
+          }
+      }).values
+      const calendarData = {
+      	title: ``,
+      	titleStyle: {
+        		fontSize: '18px',
+        		textAlign: 'center'
+      	},
+      	data: data,
+      	graphType: 'month-track',
+      	startOfWeek: 1,
+      	cellStyleRules: [
+      	  	{color: "#f1d0b4",
+      	   	min: 1,
+      	  	max: 3,
+      	  	},
+      	   	{color: "#e6a875",
+      	  	min: 3,
+      	   	max: 10,
+      	  	},
+      	   	{color: "#d97d31",
+      	  	min: 10,
+      	  	max: 50,
+      	  	},
+      	   	{color: "#b75d13",
+      	  	min: 50,
+      	   	max: 999,
+      	  	},
+      	  ]
+      }
+      renderContributionGraph(this.container, calendarData)
+    queryType: dataviewjs
+    backgroundStyle: card
+    maxHeight: 1200
+    contentAlign: left
+    dynamicParamComponents:
+      - id: 4c64594c-646a-408a-95e3-976f6e536bec
+        type: tagSuggestions
+        name: Tag
+        defaultValue: "#input"
+        placeholder: ""
+        label: 检索条件
+    title: 🏷️标签热力图
+layoutType: column
+
+```
+
+## 热力图-最近几个整月贡献
+```contributionWidget
+id: 74ecbcfa-e8a0-4506-9f58-7aa988d1c746
+type: multi
+titleAlign: center
+tabTitle: ""
+maxWidthRatio: -1
+backgroundStyle: none
+widgets:
+  - id: 3770ab6c-4e46-4937-a65b-1601a2476b58
+    type: dataview
+    titleAlign: center
+    query: |-
+      const MonthNumPre = {{MonthNum}}
+      const MonthNum = MonthNumPre<=0 ? 1 : MonthNumPre>24 ? 24 : MonthNumPre
+      const currentDate = new Date()
+      const currentMonth = currentDate.getMonth()+1
+      const currentYear = currentDate.getFullYear()
+      const casualMonth = currentMonth-MonthNum
+      const i = Math.floor((-casualMonth)/12)+1
+      const FirstYear = casualMonth<0 ? currentYear-i : currentYear
+      const LastYear = currentYear
+      const FirstMonth = casualMonth<0 ? casualMonth+12*i : casualMonth
+      const LastMonth = currentMonth
+      const FirstDay = new Date(FirstYear,FirstMonth, 2)
+      const LastDay = new Date(LastYear, LastMonth, 1)
+      const FirstDayFormatted = FirstDay.toISOString().split('T')[0]
+      const LastDayFormatted = LastDay.toISOString().split('T')[0]
+      const data = dv.pages(`""`) //替换为你需要的查询位置
+      .groupBy(p => p.file.ctime.toFormat('yyyy-MM-dd'))
+      .map(entry => {
+      return {
+      date: entry.key,
+      value: entry.rows.length,
+      items: entry.rows.map(p => ({
+              label: p.file.name,
+              link: p.file.path,
+              open: (e) => { app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey) }}))
+        }
+      })
+      const calendarData = {
+          title: `最近${MonthNum}个整月贡献`,
+          titleStyle:{
+      		fontSize: '14px',
+      		textAlign: 'center',
+          },
+          data: data, 
+          graphType: 'month-track',
+          startOfWeek: 1,
+          fromDate: FirstDayFormatted, 
+          toDate: LastDayFormatted,
+          cellStyleRules: [
+          	{color: "#f1d0b4",
+          	min: 1,
+          	max: 3,
+          	},
+          	{color: "#e6a875",
+          	min: 3,
+          	max: 10,
+          	},
+          	{color: "#d97d31",
+          	min: 10,
+          	max: 50,
+          	},
+          	{color: "#b75d13",
+          	min: 50,
+          	max: 999,
+          	},
+          ]
+      }
+      renderContributionGraph(this.container, calendarData)
+    queryType: dataviewjs
+    backgroundStyle: card
+    maxHeight: 1200
+    contentAlign: left
+    dynamicParamComponents:
+      - id: 67c1f954-5d63-45c5-8d94-d9ab5e3252c8
+        type: number
+        name: MonthNum
+        defaultValue: "1"
+        placeholder: 限制范围在1~24
+        label: 查询整月数
+    title: 整月贡献查询
+layoutType: column
+
+```
 
 ## 文件检索器(翻页第二版)
 ```contributionWidget
@@ -104,13 +272,13 @@ widgets:
       const titleMatch = (page, title) => {
           return title ? page.file.name?.toLowerCase().includes(title.toLowerCase()) : true;
       }
-      const authorMatch = (page, author) => {
+      const authorMatch = (page, author) => {// page["author"]中的author替换为自己的作者属性
       	return author&&page["author"] ? new RegExp(`.*${author}.*`, 'i').test(String(page["author"])) : false;
       }
       const tagMatch = (page, tag) => {
       	return tag ? page.file.tags && page.file.tags.some(t => t.includes(tag)) : true;
       }
-      const filteredData = dv.pages(`-"_templates" and -"_excalidraw" and -"Primer/99.Database"`)
+      const filteredData = dv.pages(`""`) //替换为你需要的查询位置
           .where(p => {
               if (pageTitleLike && !authorLike && !tagLike) {
                   return titleMatch(p, pageTitleLike)
