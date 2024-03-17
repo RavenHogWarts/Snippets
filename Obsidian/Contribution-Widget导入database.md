@@ -5,7 +5,7 @@
 
 - 复制代码片段粘贴，导入
 
-![](Contribution-Widget导入database-240317135134.png)
+![Contribution-Widget导入database-240317135134](../attachment/Contribution-Widget导入database-240317135134.png)
 
 # 代码片段
 ## 热力图-年度贡献
