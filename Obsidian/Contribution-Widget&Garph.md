@@ -1,6 +1,6 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0.313
+- `Contribution Widget` v0.316
 - `Contribution Garph` v0.9.0
 - `dataview` v0.5.64
 - `Weread` v0.10.0 (非必需)
