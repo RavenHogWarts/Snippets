@@ -31,8 +31,8 @@ dv.pages(`-"temp" and -"demo"`): 排除temp和demo目录
 
 ## 关于文件创建时间
 ```js
-// 这样的写法，是根据文件在Obsidian中的创建时间来分组
-// 但是这样有一个问题，如果你的文件移动到其他设备，或者因为其他什么原因导致文件创建时间变动，会导致查询的结果发生变动
+// 这样的写法,是根据文件在Obsidian中的创建时间来分组
+// 但是这样有一个问题,如果你的文件移动到其他设备,或者因为其他什么原因导致文件创建时间变动,会导致查询的结果发生变动
 const data = dv.pages(`""`)
 	.groupBy(p => p.file.ctime)
 	.map(···)
@@ -60,7 +60,7 @@ function formatDate(date) {
 均使用dataviewjs
 
 ## 热力图-年度贡献
-自动获取今年年份，按照文件创建时间检索全库
+自动获取今年年份,按照文件创建时间检索全库
 
 ![Contribution-Widget&Garph-240313211800](../attachment/Contribution-Widget&Garph-240313211800.png)
 
