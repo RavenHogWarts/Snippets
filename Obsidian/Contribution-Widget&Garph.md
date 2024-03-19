@@ -29,6 +29,33 @@ dv.pages(`-"temp"`): 排除temp目录
 
 dv.pages(`-"temp" and -"demo"`): 排除temp和demo目录
 
+## 关于文件创建时间
+```js
+// 这样的写法，是根据文件在Obsidian中的创建时间来分组
+// 但是这样有一个问题，如果你的文件移动到其他设备，或者因为其他什么原因导致文件创建时间变动，会导致查询的结果发生变动
+const data = dv.pages(`""`)
+	.groupBy(p => p.file.ctime)
+	.map(···)
+	.values
+
+// 所以就有了第二种方法,使用一个文档属性存储文件创建时间,比如使用created-date
+// 那么代码需要修改成下面的样子
+// 同时,需要在下方增加formatDate函数用于格式化你的日期字段
+const data = dv.pages(`""`)
+	.groupBy(p => formatDate(p["created-date"]))
+	.map(···)
+	.values
+
+function formatDate(date) {
+  const mdate = new Date(date)
+  const year = String(mdate.getFullYear())
+  const month = String(mdate.getMonth() + 1).padStart(2, '0')
+  const day = String(mdate.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+```
+
+
 # 代码片段
 均使用dataviewjs
 
