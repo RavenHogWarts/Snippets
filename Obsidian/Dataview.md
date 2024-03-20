@@ -12,6 +12,7 @@
 ![Dataview-240313210604](../attachment/Dataview-240313210604.png)
 
 ```dataviewjs
+const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json'; //自定义更改为其他加速访问方式
 const {createButton} = app.plugins.plugins["buttons"];
 const jump = async(id,state) => {
 if(state=="enable")
@@ -28,7 +29,7 @@ if(state=="disable")
 let plugins_json = [];
 async function getinfo(id) {
     if (plugins_json.length === 0) {
-        let url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json';
+        let url = `${plugins_url}`;
         let finalURL = new URL(url);
         let response = await request({ method: 'GET', url: finalURL.toString() });
         plugins_json = JSON.parse(response);
@@ -73,7 +74,7 @@ let description = manifest?.description;
   list.push(x);
     list = list.sort(function (a, b) { return a[1].innerHTML.includes("🔴") - b[1].innerHTML.includes("🔴"); });
 }
-dv.table(["<div style='width: 12rem;'>插件设置</div>", "状态", "版本号","描述","仓库"], list)
+dv.table(["插件设置", "状态", "版本号","描述","仓库"], list)
 ```
 
 [^Blue-topaz-example-vault]: [Blue-topaz-example](https://github.com/PKM-er/Blue-topaz-example)
