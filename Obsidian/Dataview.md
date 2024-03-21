@@ -20,7 +20,7 @@ const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/mast
 const localPluginsJsonPath = 'Navigation/community-plugins.json'; //设置本地文件路径变量,直接填库内的文件路径,填外部的绝对路径理论上也可以
 let plugins_json = [];
 
-// 函数来更新和加载社区插件JSON,使用本地缓存作为回退
+// 更新和加载社区插件JSON,使用本地缓存作为回退
 async function updateAndLoadPluginsJson() {
     try {
         // 尝试从远程URL获取最新的JSON数据
