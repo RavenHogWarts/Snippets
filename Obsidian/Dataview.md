@@ -1,8 +1,12 @@
 
 # 代码片段
 
-## 展示插件信息(转)
-片段来自Blue-topaz主题示例库[^Blue-topaz-example-vault]
+## 展示插件信息(更新版)
+源片段来自Blue-topaz主题示例库[^Blue-topaz-example-vault]
+
+修改逻辑,第一次使用会自动将community-plugins.json下载到本地,之后会读取本地json数据
+
+同时,每次打开都会尝试更新一次community-plugins.json
 
 前置插件:
 - `Dataview` v0.5.64
@@ -12,7 +16,44 @@
 ![Dataview-240313210604](../attachment/Dataview-240313210604.png)
 
 ```dataviewjs
-const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json'; //自定义更改为其他加速访问方式
+const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json'; //可自行更换成其他加速访问方式
+const localPluginsJsonPath = 'Navigation/community-plugins.json'; //设置本地文件路径变量,直接填库内的文件路径,填外部的绝对路径理论上也可以
+let plugins_json = [];
+
+// 函数来更新和加载社区插件JSON,使用本地缓存作为回退
+async function updateAndLoadPluginsJson() {
+    try {
+        // 尝试从远程URL获取最新的JSON数据
+        let response = await request({ method: 'GET', url: plugins_url });
+        plugins_json = JSON.parse(response);
+        // 如果更新成功,写入新的JSON数据到本地存储
+        await app.vault.adapter.write(localPluginsJsonPath, JSON.stringify(plugins_json));
+    } catch (networkError) {
+        // 如果网络请求失败,尝试读取本地文件
+        try {
+            let localData = await app.vault.adapter.read(localPluginsJsonPath);
+            plugins_json = JSON.parse(localData);
+        } catch (readError) {
+            // 如果本地读取失败,检查文件是否存在
+            try {
+                await app.vault.adapter.stat(localPluginsJsonPath);
+            } catch (statError) {
+                // 文件不存在,先创建一个空的 JSON 文件
+                await app.vault.adapter.write(localPluginsJsonPath, JSON.stringify([]));
+            }
+            // 再次尝试读取或设置默认值
+            try {
+                let localData = await app.vault.adapter.read(localPluginsJsonPath);
+                plugins_json = JSON.parse(localData);
+            } catch (finalReadError) {
+                console.error('Failed to read local plugins JSON after creating:', finalReadError);
+                plugins_json = []; // 设置默认值
+            }
+        }
+    }
+}
+await updateAndLoadPluginsJson();
+
 const {createButton} = app.plugins.plugins["buttons"];
 const jump = async(id,state) => {
 if(state=="enable")
@@ -26,13 +67,8 @@ if(state=="disable")
     app.vault.adapter.append(dv.current().file.path, "\na");
     content.then((content) => { app.vault.adapter.write(dv.current().file.path, content); })},10 );
 }
-let plugins_json = [];
 async function getinfo(id) {
     if (plugins_json.length === 0) {
-        let url = `${plugins_url}`;
-        let finalURL = new URL(url);
-        let response = await request({ method: 'GET', url: finalURL.toString() });
-        plugins_json = JSON.parse(response);
         for (let i = 0; i < plugins_json.length; i++) {
             if (plugins_json[i].id === id) {
 			        return plugins_json[i].repo
