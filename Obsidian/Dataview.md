@@ -38,7 +38,7 @@ async function updateAndLoadPluginsJson() {
             try {
                 await app.vault.adapter.stat(localPluginsJsonPath);
             } catch (statError) {
-                // 文件不存在,先创建一个空的 JSON 文件
+                // 文件不存在,先创建一个空的JSON文件
                 await app.vault.adapter.write(localPluginsJsonPath, JSON.stringify([]));
             }
             // 再次尝试读取或设置默认值
