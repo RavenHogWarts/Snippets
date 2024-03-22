@@ -17,7 +17,7 @@
 
 ```dataviewjs
 const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json'; //可自行更换成其他加速访问方式
-const localPluginsJsonPath = 'Navigation/community-plugins.json'; //设置本地文件路径变量,直接填库内的文件路径,填外部的绝对路径理论上也可以
+const localPluginsJsonPath = './.obsidian/plugins-info.json'; //设置本地文件路径变量,直接填库内的文件路径,填外部的绝对路径理论上也可以
 let plugins_json = [];
 
 // 更新和加载社区插件JSON,使用本地缓存作为回退
