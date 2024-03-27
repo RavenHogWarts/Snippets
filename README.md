@@ -12,4 +12,4 @@
 [Bitburner](./Bitburner/Bitburner-Readme.md)
 
 # Pulgins
-[obsidian-custom-sidebar-icons](./_temporary/obsidian-custom-sidebar-icons.zip)
+[obsidian-custom-sidebar-icons](https://github.com/RavenHogWarts/Snippets/releases/tag/obsidian-custom-sidebar-icons_v0.2.1)
