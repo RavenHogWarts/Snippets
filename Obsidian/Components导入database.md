@@ -3,11 +3,11 @@
 
 - `ctrl+p`打开命令列表,输入components,打开database
 
-![](Components导入database-240328204151.png)
+![Components导入database-240328204151](../attachment/Components导入database-240328204151.png)
 
 - 复制代码片段粘贴，导入
 
-![](Components导入database-240328204253.png)
+![Components导入database-240328204253](../attachment/Components导入database-240328204253.png)
 
 ## 关于dv.pages
 dv.pages(`""`): 查询所有目录
