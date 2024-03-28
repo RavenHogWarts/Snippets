@@ -1,6 +1,6 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Contribution Widget` v0.316
+- `Components(原Contribution Widget)` v20240328
 - `Contribution Garph` v0.9.0
 - `dataview` v0.5.64
 - `Weread` v0.10.0 (非必需)
@@ -8,7 +8,7 @@
 # 使用说明
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
 
-本库存放Widget插件的dataview组件代码
+本库存放Components插件的dataview组件代码
 
 - 安装好三个必要前置插件
 
@@ -16,7 +16,7 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 - 鼠标右键创建挂件，选择dataview组件
 
-![Contribution-Widget&Garph-240313210228](../attachment/Contribution-Widget&Garph-240313210228.png)
+![Components&Contribution-Garph-240313210228](../attachment/Components&Contribution-Garph-240313210228.png)
 
 - 根据代码注释修改参数
 
@@ -64,7 +64,7 @@ function formatDate(date) {
 ## 热力图-年度贡献
 自动获取今年年份,按照文件创建时间检索全库
 
-![Contribution-Widget&Garph-240313211800](../attachment/Contribution-Widget&Garph-240313211800.png)
+![Components&Contribution-Garph-240313211800](../attachment/Components&Contribution-Garph-240313211800.png)
 
 ```js
 const currentYear = new Date().getFullYear()
@@ -122,9 +122,9 @@ renderContributionGraph(this.container, options)
 ## 热力图-标签检索
 1个动态参数: 
 
-![Contribution-Widget&Garph-240313211852](../attachment/Contribution-Widget&Garph-240313211852.png)
+![Components&Contribution-Garph-240313211852](../attachment/Components&Contribution-Garph-240313211852.png)
 
-![Contribution-Widget&Garph-240313211819](../attachment/Contribution-Widget&Garph-240313211819.png)
+![Components&Contribution-Garph-240313211819](../attachment/Components&Contribution-Garph-240313211819.png)
 
 ```js
 const tag = '{{Tag}}'
@@ -175,9 +175,9 @@ renderContributionGraph(this.container, calendarData)
 ## 热力图-最近几个整月贡献
 1个动态参数: 
 
-![Contribution-Widget&Garph-240313211917](../attachment/Contribution-Widget&Garph-240313211917.png)
+![Components&Contribution-Garph-240313211917](../attachment/Components&Contribution-Garph-240313211917.png)
 
-![Contribution-Widget&Garph-240313211827](../attachment/Contribution-Widget&Garph-240313211827.png)
+![Components&Contribution-Garph-240313211827](../attachment/Components&Contribution-Garph-240313211827.png)
 
 ```js
 const MonthNumPre = {{MonthNum}}
@@ -244,9 +244,9 @@ renderContributionGraph(this.container, calendarData)
 ## 文件检索器
 4个动态参数:
 
-![Contribution-Widget&Garph-240313211630](../attachment/Contribution-Widget&Garph-240313211630.png)
+![Components&Contribution-Garph-240313211630](../attachment/Components&Contribution-Garph-240313211630.png)
 
-![Contribution-Widget&Garph-240313211712](../attachment/Contribution-Widget&Garph-240313211712.png)
+![Components&Contribution-Garph-240313211712](../attachment/Components&Contribution-Garph-240313211712.png)
 
 ```js
 const fileName = '{{FileName}}'
@@ -292,9 +292,9 @@ await dv.execute(query)
 
 7个动态参数：
 
-![Contribution-Widget&Garph-240313210739](../attachment/Contribution-Widget&Garph-240313210739.png)
+![Components&Contribution-Garph-240313210739](../attachment/Components&Contribution-Garph-240313210739.png)
 
-![Contribution-Widget&Garph-240313211353](../attachment/Contribution-Widget&Garph-240313211353.png)
+![Components&Contribution-Garph-240313211353](../attachment/Components&Contribution-Garph-240313211353.png)
 
 ```js
 const dateFormat = "YYYY-MM-DD"
@@ -363,7 +363,7 @@ dv.table(["FileName", ...headers, "CreatedDate"], pageData);
 - 不一定有第一版稳定，可能会有奇奇怪怪的bug
 - 关于动态参数，参考第一版即可，删除了PageNum参数
 
-![Contribution-Widget&Garph-240315195633](../attachment/Contribution-Widget&Garph-240315195633.png)
+![Components&Contribution-Garph-240315195633](../attachment/Components&Contribution-Garph-240315195633.png)
 
 ```js
 const dateFormat = "YYYY-MM-DD"
@@ -466,7 +466,7 @@ fy();
 ## 微信读书笔记热力图
 需安装WeRead插件
 
-![Contribution-Widget&Garph-240313211323](../attachment/Contribution-Widget&Garph-240313211323.png)
+![Components&Contribution-Garph-240313211323](../attachment/Components&Contribution-Garph-240313211323.png)
 
 ```js
 const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced with your path
@@ -541,9 +541,9 @@ renderContributionGraph(this.container, calendarData)
 
 2个动态参数：
 
-![Contribution-Widget&Garph-240313211137](../attachment/Contribution-Widget&Garph-240313211137.png)
+![Components&Contribution-Garph-240313211137](../attachment/Components&Contribution-Garph-240313211137.png)
 
-![Contribution-Widget&Garph-240313210803](../attachment/Contribution-Widget&Garph-240313210803.png)
+![Components&Contribution-Garph-240313210803](../attachment/Components&Contribution-Garph-240313210803.png)
 
 ```js
 let setting = {};

@@ -3,11 +3,11 @@
 
 - `ctrl+p`打开命令列表,输入widget,打开database
 
-![Contribution-Widget导入database-240317135020](../attachment/Contribution-Widget导入database-240317135020.png)
+![Contribution-Widget导入database-240317135020](../attachment/Components导入database-240317135020.png)
 
 - 复制代码片段粘贴，导入
 
-![Contribution-Widget导入database-240317135134](../attachment/Contribution-Widget导入database-240317135134.png)
+![Contribution-Widget导入database-240317135134](../attachment/Components导入database-240317135134.png)
 
 ## 关于dv.pages
 dv.pages(`""`): 查询所有目录
@@ -49,7 +49,7 @@ function formatDate(date) {
 # 代码片段
 ## 热力图-年度贡献
 
-```contributionWidget
+```Components
 id: aaee2c5c-91e1-40d0-8c58-ef07a836d192
 type: multi
 titleAlign: center
@@ -118,7 +118,7 @@ layoutType: column
 ```
 
 ## 热力图-标签检索
-```contributionWidget
+```Components
 id: 4445ad6d-a9b7-40f8-b72f-d3b7a94bcb3e
 type: multi
 titleAlign: center
@@ -189,7 +189,7 @@ layoutType: column
 ```
 
 ## 热力图-最近几个整月贡献
-```contributionWidget
+```Components
 id: 74ecbcfa-e8a0-4506-9f58-7aa988d1c746
 type: multi
 titleAlign: center
@@ -276,7 +276,7 @@ layoutType: column
 ```
 
 ## 文件检索器(翻页第二版)
-```contributionWidget
+```Components
 id: cee4d365-a5f7-41bc-b3a9-f93b136b7b8d
 type: multi
 titleAlign: center

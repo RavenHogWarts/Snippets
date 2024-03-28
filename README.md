@@ -1,6 +1,6 @@
 # Snippets
 ## Obsidian
-[Contribution插件](./Obsidian/Contribution-Widget&Garph.md)
+[Components&Contribution-Garph插件](Components&Contribution-Garph.md)
 
 [Weread插件](./Obsidian/WeRead.md)
 
