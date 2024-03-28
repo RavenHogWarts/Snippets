@@ -1,13 +1,13 @@
 # 使用方法
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
 
-- `ctrl+p`打开命令列表,输入widget,打开database
+- `ctrl+p`打开命令列表,输入components,打开database
 
-![Contribution-Widget导入database-240317135020](../attachment/Components导入database-240317135020.png)
+![](Components导入database-240328204151.png)
 
 - 复制代码片段粘贴，导入
 
-![Contribution-Widget导入database-240317135134](../attachment/Components导入database-240317135134.png)
+![](Components导入database-240328204253.png)
 
 ## 关于dv.pages
 dv.pages(`""`): 查询所有目录
