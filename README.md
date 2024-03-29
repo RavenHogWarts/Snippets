@@ -6,7 +6,7 @@
 
 [Weread插件](Obsidian/WeRead.md)
 
-[Style-Setting插件](Style-Setting.md)
+[Style-Setting插件](Obsidian/Style-Setting.md)
 
 [ZotLit插件](Obsidian/ZotLit.md)
 
