@@ -2,9 +2,11 @@
 ## Obsidian
 [Components&Contribution-Garph插件](Obsidian/Components&Contribution-Garph.md)
 
+[Dataview插件](Obsidian/Dataview.md)
+
 [Weread插件](Obsidian/WeRead.md)
 
-[Dataview插件](Obsidian/Dataview.md)
+[Style-Setting插件](Style-Setting.md)
 
 [ZotLit插件](Obsidian/ZotLit.md)
 
