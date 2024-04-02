@@ -1,7 +1,7 @@
 Obsidian ZotLit模板速查表[^template-cheatsheet]
 
 # 前置插件
-- `ZotLit` 1.1.4
+- `ZotLit`[^zotlit] 1.1.5
 
 # 模板
 ## `zt-annot.eta`
@@ -106,3 +106,4 @@ tags:<% if (it.tags) { %>
 ```
 
 [^template-cheatsheet]: [template-cheatsheet](https://zotlit.aidenlx.top/zh-CN/how-to/template-cheatsheet)
+[^zotlit]: [PKM-er/obsidian-zotlit: A third-party project that aims to facilitate the integration between Obsidian.md and Zotero, by providing a set of community plugins for both Obsidian and Zotero](https://github.com/PKM-er/obsidian-zotlit)

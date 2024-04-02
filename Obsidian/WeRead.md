@@ -1,7 +1,7 @@
 GitHub分享模板区[^模板分享区]
 
 # 前置插件
-- `Weread` v0.10.0
+- `Weread`[^weread] v0.10.0
 
 
 # 模板片段
@@ -101,3 +101,4 @@ lastReadDate: {{metaData.lastReadDate}}
 ```
 
 [^模板分享区]: [obsidian-weread-plugin/discussions/62#discussioncomment-7236718](https://github.com/zhaohongxuan/obsidian-weread-plugin/discussions/62#discussioncomment-7236718)
+[^weread]: [zhaohongxuan/obsidian-weread-plugin: Obsidian Weread Plugin is a plugin to sync Weread(微信读书) hightlights and annotations into your Obsidian Vault](https://github.com/zhaohongxuan/obsidian-weread-plugin)

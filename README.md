@@ -4,9 +4,11 @@
 
 [Dataview插件](Obsidian/Dataview.md)
 
-[Weread插件](Obsidian/WeRead.md)
-
 [Style-Setting插件](Obsidian/Style-Setting.md)
+
+[Templater插件](Obsidian/Templater.md)
+
+[Weread插件](Obsidian/WeRead.md)
 
 [ZotLit插件](Obsidian/ZotLit.md)
 

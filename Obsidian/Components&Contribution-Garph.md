@@ -1,9 +1,9 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Components(原Contribution Widget)` v20240328
-- `Contribution Garph` v0.9.0
-- `dataview` v0.5.64
-- `Weread` v0.10.0 (非必需)
+- `Components(原Contribution Widget)`[^components] v20240329
+- `Contribution Garph`[^contribution-garph] v0.9.0
+- `dataview`[^dataview] v0.5.66
+- `Weread`[^weread] v0.10.0 (非必需)
 
 # 使用说明
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
@@ -561,4 +561,8 @@ dv.view("../_templates/Snippets/weatherView",setting)
 
 
 [^readme_advance]: [obsidian-contribution-graph/README_ADVANCE.md](https://github.com/vran-dev/obsidian-contribution-graph/blob/master/README_ADVANCE.md)
+[^components]: [vran-dev/obsidian-components-release: Obsidian missing components](https://github.com/vran-dev/obsidian-components-release)
+[^contribution-garph]: [vran-dev/obsidian-contribution-graph: generate interactive gitxxx style contribution graph for obsidian, use it to track your goals, habits, or anything else you want to track](https://github.com/vran-dev/obsidian-contribution-graph)
+[^dataview]: [blacksmithgu/obsidian-dataview: A data index and query language over Markdown files](https://github.com/blacksmithgu/obsidian-dataview)
+[^weread]: [zhaohongxuan/obsidian-weread-plugin: Obsidian Weread Plugin is a plugin to sync Weread(微信读书) hightlights and annotations into your Obsidian Vault](https://github.com/zhaohongxuan/obsidian-weread-plugin)
 [^WeatherView]: [LumosLovegood/myScripts/WeatherView](https://github.com/LumosLovegood/myScripts/blob/main/WeatherView/Readme.md)

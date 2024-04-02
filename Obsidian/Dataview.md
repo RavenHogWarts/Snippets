@@ -1,4 +1,7 @@
 
+# 前置插件
+- `Dataview`[^dataview] v0.5.66
+
 # 代码片段
 
 ## 展示插件信息
@@ -8,9 +11,8 @@
 - 按照插件名称排序,button插件始终为启用状态
 
 前置插件:
-- `Dataview` v0.5.64
-- `Advanced URI` v1.40.0
-- `Buttons` v0.5.1
+- `Advanced URI`[^advance-url] v1.40.0
+- `Buttons`[^buttons] v0.5.1
 
 ![Dataview-240328204105](../attachment/Dataview-240328204105.png)
 
@@ -128,13 +130,13 @@ function updateProgress() {
     const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
     const secondsElapsedToday = (now - startOfDay) / 1000;
     const totalSecondsInDay = (endOfDay - startOfDay) / 1000;
-    const todayProgress = Math.floor((secondsElapsedToday / totalSecondsInDay) * 100); // 获取整数部分
+    const todayProgress = Math.floor((secondsElapsedToday / totalSecondsInDay) * 100);
 
     const progressContainer = document.createElement('div');
     progressContainer.style.textAlign = 'center';
 
     const progressParagraph = document.createElement('p');
-    progressParagraph.textContent = `今日进度：${todayProgress}%`;
+    progressParagraph.textContent = `今日进度：${todayProgress}%`; // 注释此行可屏蔽文字
     progressParagraph.style.margin = '10px 0'; // 设置上下边距
     progressContainer.appendChild(progressParagraph);
 
@@ -145,7 +147,6 @@ function updateProgress() {
     progressBar.style.setProperty('--progress-value', todayProgress / 10);
     progressContainer.appendChild(progressBar);
 
-    // 清除现有的内容并添加新的进度容器
     dv.container.innerHTML = '';
     dv.container.appendChild(progressContainer);
 }
@@ -156,7 +157,7 @@ updateProgress();
 setInterval(updateProgress, 3000);
 ```
 
-配合修改后的css使用,源码来自AnubisNekhet[^AnubisNekhet]
+配合修改后的css使用,源片段来自来自AnubisNekhet[^AnubisNekhet]
 ```css
 /* AGPLv3 License
 Nyan Cat Progress Bars
@@ -227,5 +228,60 @@ Support me: https://buymeacoffee.com/AnubisNekhet
 ```
 
 
+## 查询指定标签行内容
+源片段来自代码咖啡豆obsidian文档站[^Dvjs-QueryTags-inlineKeywords]
+- 修改逻辑,查询指定路径(可多个)中的笔记
+- 作用: 显示笔记中具有制定标签的行内容
+
+```dataviewjs
+const pathsToInclude = ["1", "2", "3"];
+const files = app.vault.getMarkdownFiles().filter(file => {
+    return pathsToInclude.some(path => file.path.includes(path));
+});
+const tag = `#tag1`; //输入想要查询的标签
+
+let arr = files.map(async (file) => {
+    const content = await app.vault.cachedRead(file);
+    let lines = content.split('\n').filter(line => line.includes(tag))
+        .map(line => line
+            .replace(/- /g, '')
+            .replace(/  /g, '')
+            .replace(tag, '')// 是否显示标签,若显示则去掉或注释这一行
+        );
+    return ["[[" + file.name.split(".")[0] + "]]", lines];
+});
+
+Promise.all(arr).then(values => {
+    const exists = values.filter(value => value[1].length > 0);
+    dv.table(["文件", "内容"], exists);
+});
+```
+
+## 查询显示往年日记
+脚本以当前日记笔记的文件名为时间节点进行查询,需放在日记中使用
+```dataviewjs
+const { DateTime } = dv.luxon; 
+const currentDate = DateTime.fromISO(dv.current().file.name);
+
+// 可自定义需要显示的标题列表
+const customTitles = ["今日日记", "个人思考", "工作总结"];
+
+let output = '';
+for (let i = 1; i <= 4; i++) {
+  const date = currentDate.minus({ years: i }).toISODate();
+  output += `### ${date}\n`;
+  for (const title of customTitles) {
+    output += `![[${date}#${title}]]\n`;
+  }
+}
+dv.header(3, output);
+```
+
+
+
+[^dataview]: [blacksmithgu/obsidian-dataview: A data index and query language over Markdown files](https://github.com/blacksmithgu/obsidian-dataview)
 [^Blue-topaz-example-vault]: [Blue-topaz-example](https://github.com/PKM-er/Blue-topaz-example)
+[^advance-url]: [shabegom/buttons: Buttons in Obsidian (github.com)](https://github.com/shabegom/buttons)
+[^buttons]: [Vinzent03/obsidian-advanced-uri: Advanced modes for Obsidian URI (github.com)](https://github.com/Vinzent03/obsidian-advanced-uri)
 [^AnubisNekhet]: [AnubisNekhet](https://github.com/AnubisNekhet)
+[^Dvjs-QueryTags-inlineKeywords]: [dataview-限定标签-显示关键字所在行 | obsidian文档咖啡豆版](https://obsidian.vip/zh/dataview-snippets/Dvjs-QueryTags-inlineKeywords.html)

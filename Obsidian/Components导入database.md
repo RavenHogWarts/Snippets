@@ -1,4 +1,6 @@
 # 使用方法
+前置插件查看[Components&Contribution-Garph](Components&Contribution-Garph.md)
+
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
 
 - `ctrl+p`打开命令列表,输入components,打开database
