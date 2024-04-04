@@ -1,10 +1,12 @@
 
 # 前置插件
+
 - `Dataview`[^dataview] v0.5.66
 
 # 代码片段
 
 ## 展示插件信息
+
 源片段来自Blue-topaz主题示例库[^Blue-topaz-example-vault]
 - 修改逻辑,第一次使用会自动将community-plugins.json下载到本地plugins-info.json
 - 每次打开都会尝试更新一次plugins-info.json
@@ -123,6 +125,7 @@ dv.table(["插件设置", "状态", "版本号","描述","仓库"], sortedList)
 ```
 
 ## 今日进度条(彩虹猫样式)
+
 ```dataviewjs
 function updateProgress() {
     const now = new Date();
@@ -229,27 +232,39 @@ Support me: https://buymeacoffee.com/AnubisNekhet
 
 
 ## 查询指定标签行内容
+
 源片段来自代码咖啡豆obsidian文档站[^Dvjs-QueryTags-inlineKeywords]
 - 修改逻辑,查询指定路径(可多个)中的笔记
+- 排除代码块中标签影响
 - 作用: 显示笔记中具有制定标签的行内容
 
 ```dataviewjs
-const pathsToInclude = ["1", "2", "3"];
+const pathsToInclude = ["1", "2", "3"]; //自定义想要查询的路径
+const tag = `#tag1`; //自定义想要查询的标签
 const files = app.vault.getMarkdownFiles().filter(file => {
     return pathsToInclude.some(path => file.path.includes(path));
 });
-const tag = `#tag1`; //输入想要查询的标签
+
 
 let arr = files.map(async (file) => {
     const content = await app.vault.cachedRead(file);
-    let lines = content.split('\n').filter(line => line.includes(tag))
+    let isInCodeBlock = false;
+    let lines = content.split('\n').filter(line => {
+	    if (line.trim().startsWith("```")) { // 检测代码块的开始和结束
+            isInCodeBlock = !isInCodeBlock;
+        }
+        if (isInCodeBlock) return false;
+	    let tagCondition = line.includes(tag);
+	    return tagCondition;
+	    })
         .map(line => line
             .replace(/- /g, '')
             .replace(/  /g, '')
-            .replace(tag, '')// 是否显示标签,若显示则去掉或注释这一行
+            .replace(tag, '')
         );
     return ["[[" + file.name.split(".")[0] + "]]", lines];
 });
+
 
 Promise.all(arr).then(values => {
     const exists = values.filter(value => value[1].length > 0);
@@ -257,8 +272,49 @@ Promise.all(arr).then(values => {
 });
 ```
 
+## 查询指定标签行内容V2
+
+增加功能: 排除包含不希望显示的标签的行
+
+```dataviewjs
+const pathsToInclude = ["Inbox", "Linkages"]; // 自定义需要查询的路径
+const tags = ["#fleeting", "#done"]; // 自定义想要查询的标签列表
+const excludeTags = ["#ignore", "#exclude"]; // 自定义希望排除的标签列表
+const files = app.vault.getMarkdownFiles().filter(file => {
+    return pathsToInclude.some(path => file.path.includes(path));
+});
+
+let arr = files.map(async (file) => {
+    const content = await app.vault.cachedRead(file);
+    let isInCodeBlock = false; // 用于追踪当前是否在代码块中
+    let linesWithAnyTagButWithoutExcludeTags = content.split('\n').filter(line => {
+        if (line.trim().startsWith("```")) { // 检测代码块的开始和结束
+            isInCodeBlock = !isInCodeBlock;
+        }
+        if (isInCodeBlock) return false;
+        let tagCondition = tags.some(tag => line.includes(tag));
+        let excludeCondition = !excludeTags.some(tag => line.includes(tag)); 
+        return tagCondition && excludeCondition;
+    })
+    .map(line => line
+        .replace(/- /g, '')
+        .replace(/  /g, '')
+        // .replace(new RegExp([...tags, ...excludeTags].join('|'), 'g'), '') // 不显示所有tag
+    );
+
+    return linesWithAnyTagButWithoutExcludeTags.length > 0 ? ["[[" + file.name.split(".")[0] + "]]", linesWithAnyTagButWithoutExcludeTags] : null;
+});
+
+Promise.all(arr).then(values => {
+    const exists = values.filter(value => value); // 确保内容非空
+    dv.table(['文件', '内容'], exists);
+});
+```
+
 ## 查询显示往年日记
+
 脚本以当前日记笔记的文件名为时间节点进行查询,需放在日记中使用
+
 ```dataviewjs
 const { DateTime } = dv.luxon; 
 const currentDate = DateTime.fromISO(dv.current().file.name);
