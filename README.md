@@ -1,4 +1,6 @@
 # Snippets
+![GitHub stars](https://img.shields.io/github/stars/RavenHogWarts/Snippets?style=flat)
+
 ## Obsidian
 [Components&Contribution-Garph插件](Obsidian/Components&Contribution-Garph.md)
 
