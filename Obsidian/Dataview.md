@@ -226,7 +226,7 @@ Support me: https://buymeacoffee.com/AnubisNekhet
 .markdown-preview-view progress[value][max="100"][class*=nyan-cat]::after,
 .markdown-rendered progress[value][max="100"][class*=nyan-cat]::after,
 .markdown-source-view.is-live-preview progress[value][max="100"][class*=nyan-cat]::after {
-  margin-left: calc(var(--progress-value) * 1em - 100px);
+  margin-left: calc(var(--progress-value) * 1em - 100px); //可根据实际需要修改100px为其他值,比如原版此处为20px
 }
 ```
 
