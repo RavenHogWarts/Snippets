@@ -828,7 +828,7 @@ Modifier: RavenHogwarts
 
 # Components插件非官方样式设置
 前置插件:
-- `Components`[^components] v20240404
+- `Components`[^components] v20240405
 
 目前修改了数据视图组件的进度条样式
 
@@ -861,7 +861,7 @@ settings:
   title: 进度条指示器间距
   type: variable-text
   default: 20px
-  description: 进度条指示器与进度条的间距(先启用进度条位置修改才能生效)
+  description: 进度条指示器与进度条的间距
 - id: Components-progress-style
   title: 进度条样式
   type: class-select

@@ -305,25 +305,13 @@ const pageTitleLike = "{{FileName}}"
 const authorLike = "{{Author}}"
 const tagLike = "{{TagA}}"
 const titleMatch = (page, title) => {
-    if (title) {
-        return page.file.name?.toLowerCase().includes(title?.toLowerCase())
-    }
-    return true
+    return title ? page.file.name?.toLowerCase().includes(title.toLowerCase()) : true;
 }
-const authorMatch = (page, author) => {
-    if (author && page["author"]) { // page["author"]中的author可替换为自己的属性
-	    const pageAuthor = String(page["author"])
-	    const regex = new RegExp(`.*${author}.*`, 'i')
-	    return regex.test(pageAuthor)
-    }else{
-	    return false
-    }
+const authorMatch = (page, author) => {// page["author"]中的author替换为自己的作者属性
+	return author&&page["author"] ? new RegExp(`.*${author}.*`, 'i').test(String(page["author"])) : false;
 }
 const tagMatch = (page, tag) => {
-	if (tag){
-		return page.file.tags && page.file.tags.some(t => t.includes(tag))
-	}
-	return true
+	return tag ? page.file.tags && page.file.tags.some(t => t.includes(tag)) : true;
 }
 const filteredData = dv.pages(`""`) //替换为你需要的查询位置
     .where(p => {
