@@ -302,7 +302,7 @@ const headers = ["tags"] // 期望的展示的属性列表
 const pageNum = {{PageNum}} // 当前页码
 const pageSize = {{PageSize}} // 单页数量
 const pageTitleLike = "{{FileName}}"
-const authorLike = "{{Author}}"
+const authorLike = `{{Author}}`
 const tagLike = "{{TagA}}"
 const titleMatch = (page, title) => {
     return title ? page.file.name?.toLowerCase().includes(title.toLowerCase()) : true;
