@@ -131,6 +131,8 @@ renderContributionGraph(this.container, options)
 
 ## 热力图-标签检索
 1个动态参数: 
+- 参数名称设置与截图一致
+- 组件名称与默认值可自定义
 
 ![Components&Contribution-Garph-240313211852](../attachment/Components&Contribution-Garph-240313211852.png)
 
@@ -188,6 +190,8 @@ renderContributionGraph(this.container, calendarData)
 
 ## 热力图-最近几个整月贡献
 1个动态参数: 
+- 参数名称设置与截图一致
+- 组件名称与默认值可自定义
 
 ![Components&Contribution-Garph-240313211917](../attachment/Components&Contribution-Garph-240313211917.png)
 
@@ -261,6 +265,8 @@ renderContributionGraph(this.container, calendarData)
 ```
 ## 文件检索器
 4个动态参数:
+- 参数名称设置与截图一致
+- 组件名称与默认值可自定义
 
 ![Components&Contribution-Garph-240313211630](../attachment/Components&Contribution-Garph-240313211630.png)
 
@@ -307,8 +313,14 @@ await dv.execute(query)
 - 增加了分页功能，通过动态参数输入PageNum实现翻页效果
 - 特点：效果稳定
 - **注意**！SortFiled的下拉选项需要手动维护
+	- `p.file.name`: 文件名
+	- `p.file.ctime`: 文件创建时间
+	- `p["created-date"]`: 文件中yaml区的created-date属性,可用于充当文件创建时间
 
 7个动态参数：
+- 参数名称设置与截图一致
+- 组件名称与默认值可自
+- `FileName` `Author` `TagA`无须设置默认值, 三者为空代表检索全部
 
 ![Components&Contribution-Garph-240313210739](../attachment/Components&Contribution-Garph-240313210739.png)
 

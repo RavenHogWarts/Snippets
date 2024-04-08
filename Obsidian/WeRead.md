@@ -3,7 +3,6 @@ GitHub分享模板区[^模板分享区]
 # 前置插件
 - `Weread`[^weread] v0.10.0
 
-
 # 模板片段
 ## 模板1
 ![WeRead-240313210528](../attachment/WeRead-240313210528.png)
