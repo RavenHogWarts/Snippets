@@ -828,7 +828,7 @@ Modifier: RavenHogwarts
 
 # Components插件非官方样式设置
 前置插件:
-- `Components`[^components] v20240405
+- `Components`[^components] v20240407
 
 目前修改了数据视图组件的进度条样式
 

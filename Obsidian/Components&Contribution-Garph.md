@@ -1,9 +1,8 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Components(原Contribution Widget)`[^components] v20240329
+- `Components`[^components] v20240407
 - `Contribution Garph`[^contribution-garph] v0.9.0
 - `dataview`[^dataview] v0.5.66
-- `Weread`[^weread] v0.10.0 (非必需)
 
 # 使用说明
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
@@ -87,7 +86,11 @@ return {
 	value: entry.rows.length,
 	items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path,
+        link: {
+	          href: p.file.path,
+	          className: "internal-link",
+	          rel: 'noopener'
+        },
         open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
 	}
@@ -143,7 +146,11 @@ return {
 	value: entry.rows.length, 
 	items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path,
+        link: {
+	          href: p.file.path,
+	          className: "internal-link",
+	          rel: 'noopener'
+        },
         open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
     }
@@ -210,7 +217,11 @@ date: entry.key,
 value: entry.rows.length,
 items: entry.rows.map(p => ({
         label: p.file.name,
-        link: p.file.path,
+        link: {
+	          href: p.file.path,
+	          className: "internal-link",
+	          rel: 'noopener'
+        },
         open: (e) => {app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey)}
         }))
   }
@@ -459,7 +470,8 @@ fy();
 ```
 
 ## 微信读书笔记热力图
-需安装WeRead插件
+前置插件:
+- `Weread`[^weread] v0.10.0
 
 ![Components&Contribution-Garph-240313211323](../attachment/Components&Contribution-Garph-240313211323.png)
 
@@ -474,13 +486,18 @@ const data = dv.pages(`"Linkages/WeRead"`) // `Linkages/WeRead` can be replaced 
     const items = []
     group.rows.forEach(p => {
       countsSum += p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
+      labeltemp = p.file.name
       valuetemp = p["reviewCount"]+p["noteCount"] // `reviewCount`and`noteCount` can be replaced with your value field
       labeltemp += ` [Counts:${valuetemp}]`
       const openLink = (e) => { app.workspace.openLinkText(p.file.name, p.file.path, e.ctrlKey) };
       items.push({
         label: labeltemp,
         value: valuetemp,
-        link: p.file.path,
+        link: {
+	          href: p.file.path,
+	          className: "internal-link",
+	          rel: 'noopener'
+        },
         open: openLink,
       })
     })
