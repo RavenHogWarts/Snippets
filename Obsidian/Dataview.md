@@ -9,54 +9,82 @@
 
 源片段来自Blue-topaz主题示例库[^Blue-topaz-example-vault]
 - 修改逻辑,第一次使用会自动将community-plugins.json下载到本地plugins-info.json
-- 每次打开都会尝试更新一次plugins-info.json
+- 每天只检查并更新一次plugins-info.json
 - 按照插件名称排序,button插件始终为启用状态
 
 前置插件:
 - `Advanced URI`[^advance-url] v1.40.0
 - `Buttons`[^buttons] v0.5.1
 
-![Dataview-240328204105](../attachment/Dataview-240328204105.png)
+![Dataview-240412144722](../attachment/Dataview-240412144722.png)
 
 ```dataviewjs
-const plugins_url = 'https://raw.gitmirror.com/obsidianmd/obsidian-releases/master/community-plugins.json'; //可自行更换成其他加速访问方式
-const localPluginsJsonPath = './.obsidian/plugins-info.json'; //设置本地文件路径变量,直接填库内的文件路径,填外部的绝对路径理论上也可以
-let plugins_json = [];
-
-// 更新和加载社区插件JSON,使用本地缓存作为回退
-async function updateAndLoadPluginsJson() {
-    try {
-        // 尝试从远程URL获取最新的JSON数据
-        let response = await request({ method: 'GET', url: plugins_url });
-        plugins_json = JSON.parse(response);
-        // 如果更新成功,写入新的JSON数据到本地存储
-        await app.vault.adapter.write(localPluginsJsonPath, JSON.stringify(plugins_json));
-    } catch (networkError) {
-        // 如果网络请求失败,尝试读取本地文件
-        try {
-            let localData = await app.vault.adapter.read(localPluginsJsonPath);
-            plugins_json = JSON.parse(localData);
-        } catch (readError) {
-            // 如果本地读取失败,检查文件是否存在
-            try {
-                await app.vault.adapter.stat(localPluginsJsonPath);
-            } catch (statError) {
-                // 文件不存在,先创建一个空的JSON文件
-                await app.vault.adapter.write(localPluginsJsonPath, JSON.stringify([]));
-            }
-            // 再次尝试读取或设置默认值
-            try {
-                let localData = await app.vault.adapter.read(localPluginsJsonPath);
-                plugins_json = JSON.parse(localData);
-            } catch (finalReadError) {
-                console.error('Failed to read local plugins JSON after creating:', finalReadError);
-                plugins_json = []; // 设置默认值
-            }
-        }
-    }
+// 引入外部plugins信息的API地址
+const pluginsApiUrl = 'https://api.github.com/repos/obsidianmd/obsidian-releases/contents/community-plugins.json';
+// 本地插件信息文件的路径
+const localPluginsJsonPath = `${app.vault.configDir}/plugins-info.json`;
+let pluginsJson = [];
+// 确保本地文件存在
+async function ensureLocalFileExists(filePath) {
+  let exists = await fileExists(filePath);
+  if (!exists) {
+    await app.vault.adapter.write(filePath, JSON.stringify([]));
+  }
 }
-await updateAndLoadPluginsJson();
-const {createButton} = app.plugins.plugins["buttons"];
+// 检查文件是否存在
+async function fileExists(filePath) {
+  try {
+    await app.vault.adapter.stat(filePath);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+// 检查文件是否在今天更新过
+async function hasBeenUpdatedToday(filePath) {
+  try {
+    let stats = await app.vault.adapter.stat(filePath);
+    let lastModifiedDate = new Date(stats.mtime);
+    let currentDate = new Date().toISOString().split('T')[0];
+    return lastModifiedDate.toISOString().split('T')[0] === currentDate;
+  } catch (error) {
+    return false;
+  }
+}
+// 每天只更新本地插件信息文件一次
+async function updatePluginsJsonIfNecessary(filePath, apiUrl) {
+  let updatedToday = await hasBeenUpdatedToday(filePath);
+  if (!updatedToday) {
+    try {
+      let response = await request({
+        method: 'GET',
+        url: apiUrl,
+        headers: { 'Accept': 'application/vnd.github.v3.raw' }
+      });
+      let pluginsData = JSON.parse(response);
+      await app.vault.adapter.write(filePath, JSON.stringify(pluginsData));
+    } catch (error) {
+      console.error('Error during network update:', error);
+    }
+  }
+}
+// 读取本地插件信息文件
+async function readLocalPluginsJson(filePath) {
+  try {
+    let localData = await app.vault.adapter.read(filePath);
+    return JSON.parse(localData);
+  } catch (error) {
+    console.error('Error reading local file:', error);
+    return [];
+  }
+}
+// 执行函数以确保本地插件信息文件存在并更新至最新
+await ensureLocalFileExists(localPluginsJsonPath);
+await updatePluginsJsonIfNecessary(localPluginsJsonPath, pluginsApiUrl);
+pluginsJson = await readLocalPluginsJson(localPluginsJsonPath);
+// 引入buttons插件创建模块
+const { createButton } = app.plugins.plugins["buttons"];
+// 插件启用或禁用的跳转函数
 const jump = async(id,state) => {
     if (state == "enable") {
         this.app.plugins.enablePluginAndSave(id);
@@ -66,29 +94,26 @@ const jump = async(id,state) => {
         this.app.plugins.disablePluginAndSave(id);
         new Notice("Disabled " + id);
     }
+    // 设置延时刷新页面
     setTimeout(async () => {
         let content = app.vault.adapter.read(dv.current().file.path);
         app.vault.adapter.append(dv.current().file.path, "\na");
         content.then(content => app.vault.adapter.write(dv.current().file.path, content));
     }, 10);
 }
-async function getinfo(id) {
-    if (plugins_json.length === 0) {
-        for (let i = 0; i < plugins_json.length; i++) {
-            if (plugins_json[i].id === id) {
-			        return plugins_json[i].repo
-            }
-        }
-    } else {
-        for (let i = 0; i < plugins_json.length; i++) {
-            if (plugins_json[i].id === id) {
-			        return plugins_json[i].repo
-            }
+// 获取插件仓库信息
+async function getInfo(id) {
+    if (pluginsJson.length === 0) {
+        return null;
+    }
+    for (let pluginInfo of pluginsJson) {
+        if (pluginInfo.id === id) {
+            return pluginInfo.repo;
         }
     }
+    return null;
 }
-dv.el("center", "一共安装【"+Object.keys(app.plugins.manifests).length+"】个插件，已启用【" + app.plugins.enabledPlugins.size + "】个插件");
-// dv.el("br","")
+
 let list = [];
 for (let key of Object.keys(app.plugins.manifests)) {
     let manifest = app.plugins.manifests[key];
@@ -105,23 +130,35 @@ for (let key of Object.keys(app.plugins.manifests)) {
         repo = `[${author}](${manifest.authorUrl})`;
     }
     let description = manifest?.description;
+	// 创建按钮组件并为其绑定点击事件
     let button = createButton({
         app,
         el: this.container,
         args: {name: manifest.id == "buttons" ? '🟢' : (status == 'enable' ? '🔴' : '🟢'), class: 'tiny'},
         clickOverride: {click: jump, params: [manifest.id, status]}
     });
+
     let row = [name, button, version, description, repo];
     list.push(row);
 }
+// 计算已启用插件的数量
+let enabledCount = list.reduce((acc, row) => {
+    return acc + (row[1].outerHTML.includes("🟢") ? 1 : 0);
+}, 0);
+// 按照状态排序插件列表
 list.sort((a, b) => a[1].innerHTML.includes("🔴") - b[1].innerHTML.includes("🔴"));
+// 按照插件名称排序插件列表
 let sortedList = list.sort((a, b) => {
     let nameA = a[0].match(/>(.*?)<\/a>/)[1].toLowerCase();
     let nameB = b[0].match(/>(.*?)<\/a>/)[1].toLowerCase();
     return nameA.localeCompare(nameB);
 });
 
-dv.table(["插件设置", "状态", "版本号","描述","仓库"], sortedList)
+let tableContainer = dv.container;
+dv.el("center", `一共安装【${Object.keys(app.plugins.manifests).length}】个插件，已启用【${enabledCount}】个插件`);
+// dv.el("br", "");
+dv.table(["插件设置", "状态", "版本号", "描述", "仓库"], sortedList);
+tableContainer.classList.add("plugins-info");
 ```
 
 ## 今日进度条(彩虹猫样式)
