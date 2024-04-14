@@ -5,7 +5,10 @@
 前置插件:
 - `Components`[^components] v20240407
 
-目前修改了数据视图组件的进度条样式, 提供两种样式
+目前修改选项:
+- 有数据视图的页面是否全宽
+- 画廊样式设置
+- 进度条样式设置
 
 ```css
 /* MIT License
@@ -17,11 +20,31 @@ Follow me: https://github.com/RavenHogWarts
 name: Components Unofficial StyleSetting
 id: Components-Unofficial-StyleSetting
 settings:
-- id: Components-dataview
+- id: Components-dynamic-dataview
   title: 数据视图
   type: heading
   level: 1
   collapsed: true
+- id: Components-dynamic-dataview-fullwidth
+  title: 数据视图全宽
+  type: class-toggle
+  default: true
+  description: 数据视图是否全宽显示
+- id: Components-dynamic-dataview-gallary
+  title: 画廊视图设置
+  type: heading
+  level: 2
+  collapsed: true
+- id: Components-dynamic-dataview-cover-aspect-ratio
+  title: 封面宽高比
+  type: variable-text
+  default: 10/7
+  description: 数据视图画廊封面宽高比,值设置成0则自动计算宽高比
+- id: Components-dynamic-dataview-title
+  title: 标题不换行显示
+  type: class-toggle
+  default: false
+  description: 数据视图画廊标题是否不换行显示
 - id: Components-progress
   title: 进度条
   type: heading
@@ -51,21 +74,39 @@ settings:
 
 */
 
-/* Components-progress */
+/* Components-body */
 body {
   --Components-progress-indicator-margin: 20px;
+  --Components-dynamic-dataview-cover-aspect-ratio: 10/7;
 }
 
-.components--progress-bar {
+/* Components-dynamic-dataview-cover-aspect-ratio */
+.dynamic-data-view-gallary .gallary-item .gallary-cover{
+  aspect-ratio: var(--Components-dynamic-dataview-cover-aspect-ratio) !important;
+}
+
+/* Components-dynamic-dataview-title */
+.Components-dynamic-dataview-title .dynamic-data-view-gallary .gallary-item .gallary-title{
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+/* Components-dynamic-dataview-fullwidth */
+body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-view) {
+  --file-line-width: 100%;
+}
+
+/* Components-progress */
+.dynamic-data-view .components--progress-bar {
   position: relative;
   display: flex;
 }
 
-.components--progress-bar-track {
+.dynamic-data-view .components--progress-bar-track {
   flex-grow: 1;
 }
 
-.progress-indicator {
+.dynamic-data-view .progress-indicator {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -155,6 +196,9 @@ body {
 }
 
 /* Components-progress-value */
+.components--progress-bar-value::after {
+  right: 100%;
+}
 .components--progress-bar-value[data-value="100"]::after {
   right: 0;
 }
