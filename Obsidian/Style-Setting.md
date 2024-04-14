@@ -3,7 +3,7 @@
 
 # Components插件非官方样式设置
 前置插件:
-- `Components`[^components] v20240407
+- `Components`[^components] v20240411
 
 目前修改选项:
 - 有数据视图的页面是否全宽
