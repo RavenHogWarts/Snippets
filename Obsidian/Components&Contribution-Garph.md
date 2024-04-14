@@ -1,6 +1,6 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Components`[^components] v20240407
+- `Components`[^components] v20240411
 - `Contribution Garph`[^contribution-garph] v0.9.0
 - `dataview`[^dataview] v0.5.66
 
