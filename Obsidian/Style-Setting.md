@@ -3,7 +3,7 @@
 
 # Components插件非官方样式设置
 前置插件:
-- `Components`[^components] v20240411
+- `Components`[^components] v20240423
 
 目前修改选项:
 - 有数据视图的页面是否全宽
@@ -40,55 +40,126 @@ settings:
   type: variable-text
   default: 10/7
   description: 数据视图画廊封面宽高比,值设置成0则自动计算宽高比
-- id: Components-dynamic-dataview-title
+- id: Components-dynamic-dataview-gallary-title
   title: 标题不换行显示
   type: class-toggle
   default: false
   description: 数据视图画廊标题是否不换行显示
-- id: Components-progress
+- id: Components-dynamic-dataview-table
+  title: 表格视图设置
+  type: heading
+  level: 2
+  collapsed: true
+- id: Components-dynamic-dataview-table-fix
+  title: 表格视图位置Fix
+  type: class-toggle
+  default: false
+- id: Components-dynamic-dataview-kanban
+  title: 看板视图设置
+  type: heading
+  level: 2
+  collapsed: true
+- id: Components-dynamic-dataview-kanban-title
+  title: 标题不换行显示
+  type: class-toggle
+  default: false
+  description: 数据视图看板标题是否不换行显示
+- id: Components-progress-bar
   title: 进度条
   type: heading
   level: 2
   collapsed: true
-- id: Components-progress-indicator
+- id: Components-progress-indicator-bar
   title: 隐藏进度条指示器
   type: class-toggle
   default: false
   description: 是否隐藏进度条指示器
-- id: Components-progress-indicator-margin
+- id: Components-progress-indicator-margin-bar
   title: 进度条指示器间距
   type: variable-text
   default: 20px
   description: 进度条指示器与进度条的间距
-- id: Components-progress-style
+- id: Components-progress-style-bar
   title: 进度条样式
   type: class-select
-  default: Components-progress-style-default
+  default: Components-progress-style-bar-default
   options:
   - label: 默认
-    value: Components-progress-style-default
+    value: Components-progress-style-bar-default
   - label: 彩虹猫
-    value: Components-progress-style-rainbow
+    value: Components-progress-style-bar-rainbow
   - label: 软萌猫
-    value: Components-progress-style-soft
-
+    value: Components-progress-style-bar-soft
+- id: Components-progress-ring
+  title: 进度圆环
+  type: heading
+  level: 2
+  collapsed: true
+- id: Components-progress-indicator-ring
+  title: 隐藏进度圆环指示器
+  type: class-toggle
+  default: false
+  description: 是否隐藏进度圆环指示器
+- id: Components-extra
+  title: 其他
+  type: heading
+  level: 2
+  collapsed: true
+- id: Components-external-link
+  title: 外部链接
+  type: class-toggle
+  default: false
+  description: 外部链接样式修改,去除下划线和修改成文本颜色
 */
+/* Components-external-link */
+.Components-external-link .contribution-link a.external-link {
+  color: var(--text-normal);
+  text-decoration-line: none;
+}
 
 /* Components-body */
 body {
-  --Components-progress-indicator-margin: 20px;
+  --Components-progress-indicator-margin-bar: 20px;
   --Components-dynamic-dataview-cover-aspect-ratio: 10/7;
 }
 
 /* Components-dynamic-dataview-cover-aspect-ratio */
-.dynamic-data-view-gallary .gallary-item .gallary-cover{
+.components--dynamic-view-card-cover{
   aspect-ratio: var(--Components-dynamic-dataview-cover-aspect-ratio) !important;
 }
 
 /* Components-dynamic-dataview-title */
-.Components-dynamic-dataview-title .dynamic-data-view-gallary .gallary-item .gallary-title{
-  white-space: nowrap !important;
-  overflow: hidden !important;
+.Components-dynamic-dataview-gallary-title .components--gallary-view .components--dynamic-view-card-title .components--dynamic-view-card-title-link .internal-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Components-dynamic-dataview-gallary-title .components--gallary-view .components--dynamic-view-card-title .components--dynamic-view-card-title-link .internal-link:hover {
+  white-space: normal;
+  background-color: transparent;
+}
+.components--gallary-view.components--project-card-small .components--progress-bar {
+  max-width: 85%;
+}
+
+/* Components-dynamic-dataview-table */
+.Components-dynamic-dataview-table-fix .dynamic-data-view-table .components--progress-bar {
+  top: 11px;
+}
+/* .Components-dynamic-dataview-table-fix .dynamic-data-view-table .components--tag {
+  position: relative;
+  margin-top: 2px;
+} */
+
+/* Components-dynamic-dataview-kanban-title */
+.Components-dynamic-dataview-kanban-title .components--kanban .components--dynamic-view-card-title .components--dynamic-view-card-title-link .internal-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Components-dynamic-dataview-kanban-title .components--kanban .components--dynamic-view-card-title .components--dynamic-view-card-title-link .internal-link:hover {
+  white-space: normal;
+  background-color: transparent;
 }
 
 /* Components-dynamic-dataview-fullwidth */
@@ -96,38 +167,42 @@ body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-vie
   --file-line-width: 100%;
 }
 
+
 /* Components-progress */
 .dynamic-data-view .components--progress-bar {
-  position: relative;
+  
   display: flex;
 }
 
-.dynamic-data-view .components--progress-bar-track {
+.dynamic-data-view .components--progress-bar .components--progress-bar-track {
   flex-grow: 1;
 }
 
-.dynamic-data-view .progress-indicator {
+.dynamic-data-view .components--progress-bar .progress-indicator {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   left: 100%;
-  margin-left: var(--Components-progress-indicator-margin);
+  margin-left: var(--Components-progress-indicator-margin-bar);
   white-space: nowrap;
 }
 
 /* Components-progress-indicator */
-.Components-progress-indicator .components--progress-bar .progress-indicator{
+.Components-progress-indicator-bar .components--progress-bar .progress-indicator{
+  display: none;
+}
+.Components-progress-indicator-ring .components--progress-ring .progress-indicator{
   display: none;
 }
 
 /* Components-progress-style */
 /* 默认 */
-.Components-progress-style-default .components--progress-bar-track {
+.Components-progress-style-bar-default .components--progress-bar-track {
   display: block;
 }
 
 /* 彩虹猫 */
-.Components-progress-style-rainbow .components--progress-bar-track {
+.Components-progress-style-bar-rainbow .components--progress-bar-track {
   background-color: var(--background-secondary);
   border-radius: 6px;
   overflow: hidden;
@@ -136,12 +211,12 @@ body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-vie
   height: 16px;
 }
 
-.Components-progress-style-rainbow .components--progress-bar-value {
+.Components-progress-style-bar-rainbow .components--progress-bar-value {
   background: linear-gradient(to bottom, #FF0000 0%, #FF0000 16.5%, #FF9900 16.5%, #FF9900 33%, #FFFF00 33%, #FFFF00 50%, #33FF00 50%, #33FF00 66%, #0099FF 66%, #0099FF 83.5%, #6633ff 83.5%, #6633ff 100%) !important;
   overflow: hidden;
 }
 
-.Components-progress-style-rainbow .components--progress-bar-value::after {
+.Components-progress-style-bar-rainbow .components--progress-bar-value::after {
   content: "";
   width: 34px;
   height: 24px;
@@ -154,7 +229,7 @@ body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-vie
   background-repeat: no-repeat !important;
 }
 
-.Components-progress-indicator-position .Components-progress-style-rainbow .components--progress-bar-value::after{
+.Components-progress-indicator-position .Components-progress-style-bar-rainbow .components--progress-bar-value::after{
   content: "";
   width: 34px;
   height: 24px;
@@ -168,7 +243,7 @@ body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-vie
 }
 
 /* 软萌猫 */
-.Components-progress-style-soft .components--progress-bar-track {
+.Components-progress-style-bar-soft .components--progress-bar-track {
   background-color: var(--background-secondary);
   border-radius: 6px;
   overflow: hidden;
@@ -177,12 +252,12 @@ body.Components-dynamic-dataview-fullwidth .workspace-leaf:has(.dynamic-data-vie
   height: 16px;
 }
 
-.Components-progress-style-soft .components--progress-bar-value {
+.Components-progress-style-bar-soft .components--progress-bar-value {
   background: linear-gradient(to bottom, var(--color-red) 0%, var(--color-orange) 16.5%, var(--color-yellow) 33%, var(--color-green) 50%, var(--color-cyan) 66%, var(--color-purple) 83.5%, var(--color-red) 100%) !important;
   overflow: hidden;
 }
 
-.Components-progress-style-soft  .components--progress-bar-value::after {
+.Components-progress-style-bar-soft .components--progress-bar-value::after {
   content: "";
   width: 34px;
   height: 24px;
