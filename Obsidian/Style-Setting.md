@@ -3,7 +3,7 @@
 
 # Components插件非官方样式设置
 前置插件:
-- `Components`[^components] v20240423
+- `Components`[^components] v20240423（公测最终版本）
 
 目前修改选项:
 - 有数据视图的页面是否全宽
@@ -48,6 +48,11 @@ settings:
   type: class-toggle
   default: false
   description: 数据视图画廊标题是否不换行显示
+- id: Components-dynamic-dataview-gallary-title-hide
+  title: 隐藏标题
+  type: class-toggle
+  default: false
+  description: 数据视图画廊是否隐藏标题
 - id: Components-dynamic-dataview-table
   title: 表格视图设置
   type: heading
@@ -143,6 +148,9 @@ body {
 }
 .components--gallary-view.components--project-card-small .components--progress-bar {
   max-width: 85%;
+}
+.Components-dynamic-dataview-gallary-title-hide .components--gallary-view .components--dynamic-view-card-title {
+  display: none;
 }
 
 /* Components-dynamic-dataview-table */
