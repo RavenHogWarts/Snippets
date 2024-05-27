@@ -1,8 +1,10 @@
 开发者文档[^readme_advance]
 # 前置插件
-- `Components`[^components] v20240411
+- `Components`[^components] v20240423（公测最终版本）
 - `Contribution Garph`[^contribution-garph] v0.9.0
 - `dataview`[^dataview] v0.5.66
+
+tips：Components插件已发布正式版，插件购买查看[【必看】购买须知（协议）](https://wxycbt0cjk.feishu.cn/wiki/LnQMwwbZui7uFXkfkYocmHmNnpx)
 
 # 使用说明
 ！！！请仔细阅读文档，不是傻瓜式使用，需要自己修改参数才能达到理想的效果
