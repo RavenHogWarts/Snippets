@@ -1,7 +1,3 @@
----
-cssclass: [custom-icon]
----
-
 # Snippets
 ![GitHub stars](https://img.shields.io/github/stars/RavenHogWarts/Snippets?style=flat)
 

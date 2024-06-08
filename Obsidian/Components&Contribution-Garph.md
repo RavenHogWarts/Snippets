@@ -29,15 +29,15 @@ dataview插件需在设置中开启`Enable Inline JavaScript Queries`
 
 
 ## 关于dv.pages
-dv.pages(`""`): 查询所有目录
+dv.pages(\`""\`): 查询所有目录
 
-dv.pages(`"temp"`): 只查询temp目录
+dv.pages(\`"temp"\`): 只查询temp目录
 
-dv.pages(`-"temp"`): 排除temp目录
+dv.pages(\`-"temp"\`): 排除temp目录
 
 多个目录使用and连接,比如
 
-dv.pages(`-"temp" and -"demo"`): 排除temp和demo目录
+dv.pages(\`-"temp" and -"demo"\`): 排除temp和demo目录
 
 ## 关于文件创建时间
 ```js
